@@ -1,6 +1,42 @@
 %! Author = mkeim
 %! Date = 6/20/24
 
+@inproceedings{gulordava-baroni-2011-distributional,
+    title = "A distributional similarity approach to the detection of semantic change in the {G}oogle {B}ooks Ngram corpus.",
+    author = "Gulordava, Kristina  and
+      Baroni, Marco",
+    editor = "Pado, Sebastian  and
+      Peirsman, Yves",
+    booktitle = "Proceedings of the {GEMS} 2011 Workshop on {GE}ometrical Models of Natural Language Semantics",
+    month = jul,
+    year = "2011",
+    address = "Edinburgh, UK",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/W11-2508",
+    pages = "67--71",
+}
+
+@inproceedings{kim-etal-2014-temporal,
+    title = "Temporal Analysis of Language through Neural Language Models",
+    author = "Kim, Yoon  and
+      Chiu, Yi-I  and
+      Hanaki, Kentaro  and
+      Hegde, Darshan  and
+      Petrov, Slav",
+    editor = "Danescu-Niculescu-Mizil, Cristian  and
+      Eisenstein, Jacob  and
+      McKeown, Kathleen  and
+      Smith, Noah A.",
+    booktitle = "Proceedings of the {ACL} 2014 Workshop on Language Technologies and Computational Social Science",
+    month = jun,
+    year = "2014",
+    address = "Baltimore, MD, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/W14-2517",
+    doi = "10.3115/v1/W14-2517",
+    pages = "61--65",
+}
+
 @misc{kulkarni2014statisticallysignificantdetectionlinguistic,
       title={Statistically Significant Detection of Linguistic Change},
       author={Vivek Kulkarni and Rami Al-Rfou and Bryan Perozzi and Steven Skiena},
@@ -9,6 +45,42 @@
       archivePrefix={arXiv},
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/1411.3315},
+}
+
+@InProceedings{10.1007/978-3-319-50496-4_18,
+    author="Liao, Xuanyi
+    and Cheng, Guang",
+    editor="Lin, Chin-Yew
+    and Xue, Nianwen
+    and Zhao, Dongyan
+    and Huang, Xuanjing
+    and Feng, Yansong",
+    title="Analysing the Semantic Change Based on Word Embedding",
+    booktitle="Natural Language Understanding and Intelligent Applications",
+    year="2016",
+    publisher="Springer International Publishing",
+    address="Cham",
+    pages="213--223",
+    abstract="This paper intend to present an approach to analyse the change of word meaning based on word embedding, which is a more general method to quantize words than before. Through analysing the similar words and clustering in different period, semantic change could be detected. We analysed the trend of semantic change through density clustering method called DBSCAN. Statics and data visualization is also included to make the result more clear. Some words like `gay', `mouse' are traced as case to prove this approach works. At last, we also compared the context words and similar words on semantic presentation and proved the context words worked better.",
+    isbn="978-3-319-50496-4"
+}
+
+@inproceedings{hamilton-etal-2016-cultural,
+    title = "Cultural Shift or Linguistic Drift? Comparing Two Computational Measures of Semantic Change",
+    author = "Hamilton, William L.  and
+      Leskovec, Jure  and
+      Jurafsky, Dan",
+    editor = "Su, Jian  and
+      Duh, Kevin  and
+      Carreras, Xavier",
+    booktitle = "Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2016",
+    address = "Austin, Texas",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D16-1229",
+    doi = "10.18653/v1/D16-1229",
+    pages = "2116--2121",
 }
 
 @inproceedings{hamilton-etal-2016-diachronic,
@@ -28,9 +100,48 @@
     pages = "1489--1501",
 }
 
+@inproceedings{kutuzov-etal-2018-diachronic,
+    title = "Diachronic word embeddings and semantic shifts: a survey",
+    author = "Kutuzov, Andrey  and
+      {\O}vrelid, Lilja  and
+      Szymanski, Terrence  and
+      Velldal, Erik",
+    editor = "Bender, Emily M.  and
+      Derczynski, Leon  and
+      Isabelle, Pierre",
+    booktitle = "Proceedings of the 27th International Conference on Computational Linguistics",
+    month = aug,
+    year = "2018",
+    address = "Santa Fe, New Mexico, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/C18-1117",
+    pages = "1384--1397",
+    abstract = "Recent years have witnessed a surge of publications aimed at tracing temporal changes in lexical semantics using distributional methods, particularly prediction-based word embedding models. However, this vein of research lacks the cohesion, common terminology and shared practices of more established areas of natural language processing. In this paper, we survey the current state of academic research related to diachronic word embeddings and semantic shifts detection. We start with discussing the notion of semantic shifts, and then continue with an overview of the existing methods for tracing such time-related shifts with word embedding models. We propose several axes along which these methods can be compared, and outline the main challenges before this emerging subfield of NLP, as well as prospects and possible applications.",
+}
+
+@inproceedings{giulianelli-etal-2020-analysing,
+    title = "Analysing Lexical Semantic Change with Contextualised Word Representations",
+    author = "Giulianelli, Mario  and
+      Del Tredici, Marco  and
+      Fern{\'a}ndez, Raquel",
+    editor = "Jurafsky, Dan  and
+      Chai, Joyce  and
+      Schluter, Natalie  and
+      Tetreault, Joel",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.acl-main.365",
+    doi = "10.18653/v1/2020.acl-main.365",
+    pages = "3960--3973",
+    abstract = "This paper presents the first unsupervised approach to lexical semantic change that makes use of contextualised word representations. We propose a novel method that exploits the BERT neural language model to obtain representations of word usages, clusters these representations into usage types, and measures change along time with three proposed metrics. We create a new evaluation dataset and show that the model representations and the detected semantic shifts are positively correlated with human judgements. Our extensive qualitative analysis demonstrates that our method captures a variety of synchronic and diachronic linguistic phenomena. We expect our work to inspire further research in this direction.",
+}
+
 @article{10.1162/opmi_a_00081,
     author = {Laurino, Julieta and De Deyne, Simon and Cabana, Álvaro and Kaczer, Laura},
-    title = "{The Pandemic in Words: Tracking Fast Semantic Changes via a Large-Scale Word Association Task}",
+    title = "The Pandemic in Words: Tracking Fast Semantic Changes via a Large-Scale Word Association Task",
     journal = {Open Mind},
     volume = {7},
     pages = {221-239},
@@ -42,3 +153,5 @@
     url = {https://doi.org/10.1162/opmi\_a\_00081},
     eprint = {https://direct.mit.edu/opmi/article-pdf/doi/10.1162/opmi\_a\_00081/2133848/opmi\_a\_00081.pdf},
 }
+
+
