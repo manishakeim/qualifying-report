@@ -1,0 +1,20 @@
+%! Author = mkeim
+%! Date = 7/18/24
+
+\section{RP2.} \label{sec:paper_hamilton}
+\subsection{Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change}
+
+1.	Creating Word Embeddings:
+•	They create word embeddings for different time periods using historical text corpora.
+2.	Using SVD, PPMI, and SGNS:
+•	SVD (Singular Value Decomposition): They apply SVD to the Positive Pointwise Mutual Information (PPMI) matrices to reduce the dimensionality of the word vectors.
+•	PPMI (Positive Pointwise Mutual Information): They use PPMI to measure the association between words and their contexts. PPMI values are computed for each time period to capture word-context relationships.
+•	SGNS (Skip-Gram with Negative Sampling): They also use the SGNS model to create word embeddings, leveraging its effectiveness in capturing semantic relationships.
+3.	Aligning Word Embeddings:
+•	They align word embeddings across different time periods to ensure that the same word in different periods is represented in a comparable way. This alignment allows for tracking changes in word meanings over time.
+4.	Analyzing Semantic Change:
+•	By comparing word embeddings from different time periods, they analyze the semantic shifts. They use cosine similarity to measure changes in word meanings and identify words that have undergone significant semantic shifts.
+
+•	PPMI: They computed PPMI matrices for each time period, capturing the association between words and their contexts.
+•	SVD: They applied SVD to the PPMI matrices to reduce the dimensionality of the vectors, making them more manageable and interpretable.
+•	SGNS: They used the SGNS model to directly create word embeddings, leveraging its ability to capture semantic relationships in a low-dimensional space.
