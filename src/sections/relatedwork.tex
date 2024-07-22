@@ -62,6 +62,38 @@ Semantic change refers to any change in the meaning(s) of a word over time or ac
 Kutuzov et al.\ (2018) conducted a survey on semantic shifts, consolidating the existing academic research in this domain.
 Their work provides a comprehensive overview of the methodologies and findings related to tracking semantic changes over time using computational techniques.
 
+\begin{table}[]
+\centering
+\small
+\begin{tabular}{@{}llllll@{}}
+\toprule
+\multicolumn{1}{c}{\textbf{\begin{tabular}[c]{@{}c@{}}Linguistic \\ Change\end{tabular}}} & \multicolumn{1}{c}{\textbf{Approach}}                                              & \multicolumn{1}{c}{\textbf{TCD}} & \multicolumn{3}{c}{\textbf{Example}}                                                                                                                                                                 \\ \cmidrule(l){4-6}
+\multicolumn{1}{c}{\textbf{}}                                                             & \multicolumn{1}{c}{\textbf{}}                                              & \multicolumn{1}{c}{\textbf{}}    & \textbf{Word}         & \textbf{Former Usage}                                                                & \textbf{New Usage}                                                                    \\ \midrule
+\multicolumn{1}{l}{\textbf{Semantic}}                                                     & \multicolumn{1}{l}{\textbf{FREQUENCY}}                                             & \multicolumn{1}{l}{}            & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}                                                                & \multicolumn{1}{l}{}                                                                 \\ \midrule
+\textbf{}                                                                                 & Log Ratio                                                                  & 1960 \& 1990                     & disk                  & -                                                                                    & -                                                                                     \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Word \\ Frequency\end{tabular}                  & 1900--2005                      & bitch                 & female dog                                                                           & slang                                                                                 \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Law of \\ Conformity\end{tabular}               & 1800--2000                      & -                     & -                                                                                    & -                                                                                     \\ \cmidrule(l){2-6}
+                                                                                          & \textbf{DISTRIBUTIONAL}                                                             &                                  &                       &                                                                                      &                                                                              \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Local Mutual \\ Information\end{tabular}        & 1960 \& 1990                     & sleep                 & deep sleep                                                                           & sleep disorder                                                                        \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Continuous \\ Word \\ Embeddings\end{tabular}   & 1900--2009                      & cell                  & closet, dungeon                                                                      & phone, cordless                                                                       \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Change Point \\ Algorithm\end{tabular}          & 1900--2005                      & gay                   & cheerful, dapper                                                                     & \begin{tabular}[c]{@{}l@{}}lesbian, \\ homosexual\end{tabular}                        \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & Clustering (DBSCAN)                                                        & 1900--2000                      & mouse                 & mice, rat                                                                            & cursor, pointer                                                                       \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Cultural and \\ linguistic Drift\end{tabular}   & 1800--2000                      & virus                 & \begin{tabular}[c]{@{}l@{}}infected with\\  the virus\end{tabular}                   & \begin{tabular}[c]{@{}l@{}}spreading\\  computer virus\end{tabular}                   \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Diachronic \\ Word\\ Embeddings\end{tabular}    & 1800--1999                      & awful                 & full of awe                                                                          & terrible or appalling                                                                 \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Contextual \\ Word \\ Embeddings\end{tabular}                                                                      & 1910 – 2009                      & tenure                & \begin{tabular}[c]{@{}l@{}}short term leases,\\ insecurity of tenure\end{tabular}    & \begin{tabular}[c]{@{}l@{}}tenure of office, \\ employment \\ and tenure\end{tabular} \\ \cmidrule(l){2-6}
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Semantic \\ Similarity \\ Analysis\end{tabular} & 2014--2022                      & immunity              & \begin{tabular}[c]{@{}l@{}}politics (‘legislator’,\\ ‘representative’).\end{tabular} & \begin{tabular}[c]{@{}l@{}}health-related \\ (‘prevention’, ‘AIDS’)\end{tabular}      \\ \cmidrule(l){2-6}
+                                                                                          & \textbf{PART OF SPEECH}                                                                        &                                  &                       &                                                                                      &                                                                   \\ \midrule
+\textbf{Syntactic}                                                                        & POS Tags                                                                   & 1900--2000                        & windows               & \begin{tabular}[c]{@{}l@{}}doors and \\ windows of a house\end{tabular}              & Microsoft Windows                                                                     \\ \midrule
+\textbf{}                                                                                 & \begin{tabular}[c]{@{}l@{}}Mixed-model \\ Regressions\end{tabular}         & 1800--2000                      & actually              & originally, nominally                                                                & presumed, believe\\
+
+\bottomrule
+\end{tabular}
+%\bottomrule
+\caption{Various types of linguistic change and method used to detect them.}
+\label{tab:related-work}
+\end{table}
+
+% ------------------------------------------------------------------ SEMANTIC ------------------------------------------------------------------
 \begin{itemize}
     \item \textbf{Investigating Semantic Shifts Through Word Contexts.}
     Gulordava and Baroni (2011) detected semantic change by focusing on words used in the 1960s and 1990s.
@@ -173,7 +205,7 @@ Their work provides a comprehensive overview of the methodologies and findings r
         For instance, words like `quarantine', `mask', and `social distancing' took on new and prominent meanings in everyday conversation.
 \end{itemize}
 
-% --------------------------------- SYNTACTIC ---------------------------------
+% ------------------------------------------------------------------ SYNTACTIC ------------------------------------------------------------------
 \para{Linguistic change studies have shifted to include \emph{syntax} alongside semantics.}
 The field of linguistic change has traditionally focused on \emph{semantics}.
 However, recent studies have begun to explore the role of \emph{syntax} in language evolution as well.
@@ -203,26 +235,9 @@ While verbs are more likely to participate in gradual semantic changes that foll
          \item The evolution of words like `actually', `must', and `promise' demonstrate these changes.
          For instance, `must' has transitioned from expressing obligation to indicating necessity, showcasing a common pattern seen in modal verbs.
      \end{itemize}
-
-
-%    Cultural changes like new technologies are related to local neighbourhood change, which is more sensitive to changes in nouns.
-%    Examples: gay, virus, cell
-%    Linguistic changes like subjectification is related to global measure, which is more sensitive to change in verbs.
-%    Examples: actually, must, promise
-%    actually is a case of subjectification
-%    must shifted from a deontic/obligation usage (“you must do X”) to a epistemic one (“X must be the case”), exemplifying a regular pattern of change common to many modal verb
-%    promise represents the class of shifting “performative speech acts” that undergo rich changes due to their pragmatic uses and subjectification
-
-%    \item \para{Acquiring a new sense:}
-%    Words are complex entities with multiple senses that can evolve over time while their form remains constant, as discussed by (Laurino et al., 2023).
-%    Their research studies the overall mental lexicon of words, focusing on quantifying the drift of word concepts.
-%    The study highlights how most words possess a range of meanings that can be added, removed, or modified across different temporal contexts.
 \end{itemize}
 
-
-\vspace{5mm}
-%Among the reviewed literature, three studies are particularly pertinent to our analysis of data voids.
-%In case of data voids, we want to find shifts from it's previous usage to new usage.
+% ------------------------------------------------------------------ THREE PAPERS ------------------------------------------------------------------
 Several studies from our literature review provide valuable insights for addressing data voids in our analysis.
 \begin{itemize}
     \item The first being the work by Kulkarni et al.\ which introduces us to time series construction.
@@ -236,26 +251,3 @@ One key finding from their work is that words directly related to the pandemic e
 This suggests that these words underwent a more significant and rapid semantic shift compared to control words not associated with the pandemic.
 They also employ semantic similarity analysis to quantify the shifts in meaning for pandemic-related words and provides evidence that the COVID-19 pandemic acted as a catalyst for rapid semantic change.
 \end{itemize}
-
-\begin{table}[t]
-\centering
-\begin{tabular}{lllll}
-\toprule
-\textbf{Causes}    & \textbf{Methods}        & \textbf{Technical Method} & \textbf{Time Period} & \textbf{Example Papers} \\ \hline
-\textbf{Semantic}  & \textbf{Frequency}      & Log ratio                 & 1960 \& 1990         & {[}1{]}                 \\ \hline
-                   &                         & Word Frequencies          & 1900 - 2005          & {[}5{]}                 \\ \cline{3-5}
-                   &                         & Cosine Distance           &                      &                         \\ \cline{2-5}
-                   & \textbf{Distributional} & Co-occurence              & 1960 \& 1990         & {[}1{]}                 \\ \cline{2-5}
-                   &                         & NLM                       &                      & {[}4{]}                 \\ \cline{3-5}
-                   &                         & Cosine Similarity         & 1900 - 2005          & {[}5{]}                 \\ \cline{3-5}
-                   &                         & Aligning Embeddings       &                      & {[}3{]}                 \\ \cline{3-5}
-                   &                         & DBSCAN                    &                      & {[}8{]}                 \\ \cline{3-5}
-                   &                         & BERT                      &                      & {[}8{]}                 \\ \hline
-\textbf{Syntactic} & \textbf{POS Tags}       & JS Divergence             & 1900-2000            & {[}3{]}                 \\ \hline
-                   &                         & Cosine Distance           & 1800 - 1990          & {[}2{]}                 \\ \cline{3-5}
-\textbf{}          & \textbf{}               & KL Divergence             & 2020 \& 2023         & {[}7{]}                 \\
-\bottomrule
-\end{tabular}
-\caption{Various types of linguistic change and method used to detect them.}
-\label{tab:related-work}
-\end{table}
