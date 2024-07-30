@@ -95,36 +95,33 @@
 \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
 
 \begin{document}
+  \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+  \pagestyle{plain} % removes running headers
 
-\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
-\pagestyle{plain} % removes running headers
 
+  \renewcommand{\sectionautorefname}{\S}
+  \renewcommand{\subsectionautorefname}{\S}
+  \renewcommand{\subsubsectionautorefname}{\S}
 
-\renewcommand{\sectionautorefname}{\S}
-\renewcommand{\subsectionautorefname}{\S}
-\renewcommand{\subsubsectionautorefname}{\S}
+  \input{sections/titlepage}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Table of Contents
+  \tableofcontents
+  \newpage
 
-\input{sections/titlepage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%% Table of Contents
-\tableofcontents
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
-%\maketitle
-%\sloppy
-%\input{sections/abstract}
-%\newpage
-\input{sections/introduction}
-\newpage
-\input{sections/relatedwork}
-\newpage
-\input{sections/paper_kulkarni}
-\newpage
-\input{sections/paper_hamilton}
-\balance
-
-\newpage
-\bibliographystyle{ACM-Reference-Format}
-\bibliography{main}
-
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+  %\maketitle
+  %\sloppy
+  %\input{sections/abstract}
+  %\newpage
+  \input{sections/introduction}
+  \newpage
+  \input{sections/relatedwork}
+  \newpage
+  \input{sections/paper_kulkarni}
+  \newpage
+  \input{sections/paper_hamilton}
+  \balance
+  \newpage
+  \bibliographystyle{ACM-Reference-Format}
+  \bibliography{main}
 \end{document}
