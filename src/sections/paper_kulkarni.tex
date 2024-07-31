@@ -41,7 +41,7 @@ Kulkarni et al.\ propose several methods to create this time series, aimed at un
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[scale=0.5]{figures/kulkarni1}
+    \includegraphics[scale=0.8]{figures/kulkarni_drawio}
     \caption{My caption}
     \label{fig:label}
 \end{figure}
@@ -63,9 +63,10 @@ Changes in frequency can indicate whether a word is gaining new meanings or losi
 For example, the word “gay” in \Cref{fig:example-gay} shows a noticeable spike in usage during the 1980s, signaling a shift in its meaning or cultural relevance.
 Tools such as the Google Books Ngram Viewer and Google Trends are used for this purpose, as they provide large datasets and visual representations of word usage across different timeframes.
 They calculate the change in probability of a word appearing over time.
-\begin{displaymath}
-$T_t(w) = \log \frac{#(w \in C_t)}{|C_t|}$ \label{eq:equation}
-\end{displaymath}
+\begin{equation}
+\mathbf{T_t(w)} = \log \frac{#(w \in C_t)}{|C_t|}
+\label{eq:equation}
+\end{equation}
 
 \textbf{(2) Syntactic method:}
 Frequency-based metrics, while simple to compute, are susceptible to errors caused by imbalances in the corpus's domain and genre distribution.
@@ -117,7 +118,9 @@ If a significant shift is detected, the algorithm then identifies and returns th
 \textbf{Frequency}      & transmistted, bitch, sex, her                  &  &  &  \\
 \textbf{Syntactic}      & apple, hug, sink, click, handle, windows, bush &  &  &  \\
 \textbf{Distributional} & diet, tape, plastic                            &  &  &  \\ \bottomrule
-\end{tabular}\label{tab:time-series-examples}
+\end{tabular}
+\caption{Time Series Analysis}
+\label{tab:time-series-examples}
 \end{table}
 
 Frequency \& Distributional - transmistted, bitch, sex, her
@@ -131,6 +134,7 @@ The Syntactic method is indicative of having low false positive rate, but suffer
 Distributional - diet, tape, plastic
 The popularity of books on dieting started with the best selling book Dr. Atkins’ Diet Revolution by Robert C. Atkins in 1972.
 This changed the use of the word diet to mean a life-style of food consumption behavior and not only the food consumed by an individual or group.
+\\
 
 \para{Cross Domain Analysis.}
 Amazon Reviews and Twitter (content that spans a much shorter time scale as compared to Google Books Ngram Corpus)
@@ -143,7 +147,9 @@ What is the effect of applying distributional method on Amazon Review, Twitter d
 \textbf{Dataset Source} & \textbf{Examples}                     &  &  &  \\ \midrule
 \textbf{Amazon Reviews} & streaming, ray, combo, rays, twilight &  &  &  \\
 \textbf{Twitter Tweets} & candy, myster, rally, sandy           &  &  &  \\ \bottomrule
-\end{tabular}\label{tab:sources-examples}
+\end{tabular}
+\caption{Cross Domain Analysis}
+\label{tab:sources-examples}
 \end{table}
 
 Words - streaming, ray, combo, rays, twilight
@@ -158,7 +164,8 @@ The paper by Kulkarni et al.\ (2015) contributes a novel and rigorous approach t
 Their contribution in using large historical corpora and word embeddings to capture the dynamic nature of language.
 A statistical framework that ensures the detected changes are significant, avoiding false positives due to noise or minor fluctuations.
 
-Despite the fast pace of change of the web content, our method is able to detect the introduction of new products, movies and books. This could help semantically aware web applications to better understand user intentions and requests.
+Despite the fast pace of change of the web content, their method is able to detect the introduction of new products, movies and books.
+This could help semantically aware web applications to better understand user intentions and requests.
 
 
 %Also, after knowing that a change has occurred, we would like to know when did that change really occur so that we can co-relate that the data void occured when a political event happened or how the COVID outbreak event,
