@@ -13,6 +13,13 @@ a vast collection spanning from 1900 to 2009,
 encompassing over 500 billion books in seven languages.
 This dataset provides n-grams with corresponding yearly occurrences and frequencies.
 
+\begin{figure}[tbh]
+\vspace{-1em}
+\centering
+\includegraphics[scale=0.45]{figures/survey}
+\caption{Timeline of models used to study semantic shifts (taken from \cite{kutuzov-etal-2018-diachronic})}\label{fig:testsvg}
+\end{figure}
+
 \para{Words can change meaning over time through several linguistic processes.}
 Words have the ability to undergo shifts in meaning over the course of time as a result of various linguistic mechanisms,
 including but not limited to:
@@ -57,6 +64,8 @@ Certain studies concentrated on semantic changes, some worked on syntactic chang
 and others explored the broader evolution that words underwent ~\cite{gulordava-baroni-2011-distributional, kim-etal-2014-temporal, kulkarni2014statisticallysignificantdetectionlinguistic, hamilton-etal-2016-diachronic}.
 \Cref{tab:related-work} outlines various types of linguistic changes and the approaches employed to identify them.
 
+% ------------------------------------------------------------------ SEMANTIC ------------------------------------------------------------------
+\subsection{Semantic Drift} \label{subsec:semantic-drift}
 \para{Building on the extensive research on \emph{semantic} change.}
 Semantic change refers to any change in the meaning(s) of a word over time or acquiring a new sense ~\cite{gulordava-baroni-2011-distributional, 10.1162/opmi_a_00081}.
 Kutuzov et al.\ (2018) conducted a survey on semantic shifts, consolidating the existing academic research in this domain.
@@ -72,7 +81,7 @@ Their work provides a comprehensive overview of the methodologies and findings r
 \rowcolor{lightgray}                                 & \multicolumn{5}{c}{\textbf{FREQUENCY \cite{gulordava-baroni-2011-distributional, kulkarni2014statisticallysignificantdetectionlinguistic, hamilton-etal-2016-diachronic}}}                                                                                                                                                                   \\
 \textbf{\textbf{Semantic}}                           & Log Ratio                                                                        & 1960 \& 1990                          & disk                      & -                                                                                             & -                                                                                     \\ \cmidrule(l){2-6}
 \textbf{}                                            & Word Frequency                                                                   & 1900--2005                            & bitch                     & female dog                                                                                    & slang                                                                                 \\ \cmidrule(l){2-6}
-\rowcolor{lightgray}                                 & \multicolumn{5}{c}{\textbf{DISTRIBUTIONAL \cite{gulordava-baroni-2011-distributional, kim-etal-2014-temporal, kulkarni2014statisticallysignificantdetectionlinguistic, 10.1007/978-3-319-50496-4_18, hamilton-etal-2016-diachronic, hamilton-etal-2016-cultural, 10.1162/opmi_a_00081, giulianelli-etal-2020-analysing}}}                                                                                                                                         \\ \cmidrule(l){2-6}
+\rowcolor{lightgray}                                 & \multicolumn{5}{c}{\textbf{DISTRIBUTIONAL \cite{gulordava-baroni-2011-distributional, kim-etal-2014-temporal, kulkarni2014statisticallysignificantdetectionlinguistic, 10.1007/978-3-319-50496-4_18, hamilton-etal-2016-diachronic, hamilton-etal-2016-cultural, 10.1162/opmi_a_00081, giulianelli-etal-2020-analysing}}}                                                                                                                    \\ \cmidrule(l){2-6}
 \textbf{}                                            & \begin{tabular}[c]{@{}l@{}}Local Mutual \\ Information\end{tabular}              & 1960 \& 1990                          & sleep                     & deep sleep                                                                                    & sleep disorder                                                                        \\ \cmidrule(l){2-6}
 \textbf{}                                            & \begin{tabular}[c]{@{}l@{}}Continuous Word \\ Embeddings\end{tabular}            & 1900--2009                            & cell                      & closet, dungeon                                                                               & phone, cordless                                                                       \\ \cmidrule(l){2-6}
 \textbf{}                                            & \begin{tabular}[c]{@{}l@{}}Change Point \\ Algorithm\end{tabular}                & 1900--2005                            & gay                       & cheerful, dapper                                                                              & \begin{tabular}[c]{@{}l@{}}lesbian, \\ homosexual\end{tabular}                        \\ \cmidrule(l){2-6}
@@ -89,171 +98,169 @@ Their work provides a comprehensive overview of the methodologies and findings r
 
 \caption{\textbf{Comparative Overview of Linguistic Change Detection Approaches.}
 This table provides a comprehensive summary of various approaches and contributions to the study of linguistic changes,
-    categorizing the type of changes (semantic or syntactic), and the methodologies used, including frequency and distributional approaches.
-    It highlights each study’s methods, such as word embeddings, statistical analysis, and clustering, along with the time periods of change detection (TCD) and examples of words.}
+categorizing the type of changes (semantic or syntactic), and the methodologies used, including frequency and distributional approaches.
+It highlights each study’s methods, such as word embeddings, statistical analysis, and clustering, along with the time periods of change detection (TCD) and examples of words.}
 \label{tab:related-work}
 \end{table}
-\vspace{0mm}
-% ------------------------------------------------------------------ SEMANTIC ------------------------------------------------------------------
-\begin{itemize}
-    \item \textbf{Investigating Semantic Shifts Through Word Contexts.}
-    Gulordava and Baroni (2011) detected semantic change by focusing on words used in the 1960s and 1990s.
-        They compared the similarity of the surrounding words (words that co-occur with the target word) in these two time periods.
-    \begin{itemize}
-        \item To assess similarity, the researchers calculated the \emph{Local Mutual Information (LMI)} score between the central word and its surrounding words.
-        A low LMI score between the target word and its surrounding words across the two time periods indicated a potential semantic shift.
-        \item The study demonstrated that their distributional similarity models were effective in capturing \emph{cultural shifts} in word meaning.
-        For example, they found that the word `sleep' acquired more negative connotations related to sleep disorders when comparing its contexts in the 1960s to those in the 1990s.
-    \end{itemize}
+\raggedbottom
+%\vspace{-1em}
 
-    \item \para{Tracking Meaning Evolution Through Neural Nets.}
-    Kim et al.\ (2014) focused on analyzing how word meanings evolved between 1900 and 2009.
-    \begin{itemize}
-        \item They developed the first method that employed \emph{prediction-based model} to trace semantic shifts.
-        This involved training a model on data from a specific year $y_i$ and then using the resulting word vectors as the starting point for training the model on the next year's data $y_i+1$.
-        \item Their method analyzed \emph{global shifts} in a word's vector semantics.
-        Additionally, by plotting the time series of a word's distance to its neighboring words in the model's vector space, they visualized the period during which the semantic shift occurred.
-        \item They demonstrated this for the word `cell' compared to its early neighbors, `closet' and `dungeon,' and the more recent neighbors, `phone' and `cordless.'
-        For `cell,' the identified period of change (1985-2009), which interestingly coincides with the introduction and widespread adoption of cell phones by the public.
-    \end{itemize}
+\para{Investigating Semantic Shifts Through Word Contexts.}
+Gulordava and Baroni (2011) detected semantic change by focusing on words used in the 1960s and 1990s.
+They compared the similarity of the surrounding words (words that co-occur with the target word) in these two time periods.
 
-    \item \para{Pinpointing Significant Shifts Statistically.}
-    Kulkarni et al.\ (2015) proposes a novel computational approach to identify and quantify the semantic and usage changes in words across various media (new products, movies and books).
-    \begin{itemize}
-        \item Building on the concept of distributed representations proposed by Hinton ~\cite{hinton1986learning}, they map words into a continuous vector space where words with similar meanings are positioned close together.
-        \item The approach hinges on constructing \emph{property time series} for each word.
-        They propose three methods for constructing these time series (\Cref{sec:paper_hamilton}).:
-        \begin{itemize}
-            \item \textbf{Frequency:}
-            This method analyzes changes in a word's overall frequency of use, assuming a sudden shift in frequency might indicate a semantic shift.
-            \item \textbf{Syntactic:}
-            This method examines the distribution of a word's part-of-speech tags (e.g., noun, verb) across different time periods, aiming to capture changes in how the word functions grammatically.
-            \item \textbf{Distributional:}
-            This approach leverages word embeddings which are created for each year, and then alignment is done to represent them in joint embedding space,
-            and it's utilized to construct distributional time series for a word's displacement.
-        \end{itemize}
-        \item Finally, they employed statistically sound \emph{change point detection algorithm} to identify significant moments in these time series, pinpointing the periods where word meaning or usage likely underwent a shift.
-        Their results indicated that computational methods for the detection of semantic shifts can be robustly applied to time spans less than a decade.
-    \end{itemize}
+To assess similarity, the researchers calculated the \emph{Local Mutual Information (LMI)} score between the central word and its surrounding words.
+A low LMI score between the target word and its surrounding words across the two time periods indicated a potential semantic shift.
+The study demonstrated that their distributional similarity models were effective in capturing \emph{cultural shifts} in word meaning.
+For example, they found that the word `sleep' acquired more negative connotations related to sleep disorders when comparing its contexts in the 1960s to those in the 1990s.
 
-    \item \para{Word Semantic Modelling of Polysemant.}
-        Liao and Cheng (2016) explored the semantic changes of words.
-        Their approach built on the understanding that word meaning is closely tied to its context.
-        When a word's meaning changes, the surrounding words used with it \emph{(context words)} are likely to change as well.
-        They focused on \emph{polysemous} words (words with multiple meanings) and aimed to detect when new meanings emerged.
-    \begin{itemize}
-        \item They used the \emph{skip-gram architecture with negative sampling} ~\cite{10.5555/2999792.2999959} to obtain word embeddings.
-        This technique helped in capturing the contextual meaning of words by representing them in a continuous vector space.
-        \item They employed \emph{DBSCAN} to group word embeddings.
-        DBSCAN helped in identifying clusters of similar word contexts and distinguishing them from noise, which could indicate semantic changes.
-        \item To find similar words, they used a nearest neighbor search method called \emph{Random Project Forest}.
-        This method helped in identifying words that are contextually similar to a given word.
-        \item Finally, they compared the stability of \emph{similar words} with the stability of their \emph{context words}.
-    \end{itemize}
+\para{Tracking Meaning Evolution Through Neural Nets.}
+Kim et al.\ (2014) focused on analyzing how word meanings evolved between 1900 and 2009.
+They developed the first method that employed \emph{prediction-based model} to trace semantic shifts.
+This involved training a model on data from a specific year $y_i$ and then using the resulting word vectors as the starting point for training the model on the next year's data $y_i+1$.
 
-    \item \para{Distinguishing Cultural Shifts from Linguistic Drift.}
-    Hamilton et al.\ (2016) addressed the challenge of distinguishing between \emph{cultural shifts} and \emph{linguistic drift}, both of which can contribute to semantic change.
-    \begin{itemize}
-        \item They proposed two distinct measures based on distributional semantics to distinguish between these two types of semantic change:
-        \begin{itemize}
-            \item \para{Local Neighborhood Measure:} This measure focused on the closest neighbors (most similar words) in a word's embedding.
-            A drastic shift in these nearest neighbors suggests a significant change in core meaning, potentially driven by a \emph{cultural shift}
-            (e.g., `gay' changing from carefree to referring to homosexuality).
-            \item \para{Global Measure:} This measure considered the overall distribution of a word's surrounding words in a larger context window.
-            Gradual changes in this broader distribution are more likely to reflect \emph{linguistic drift}, the natural evolution of language due to regular processes
-            (e.g., `promise' expanding from a declaration to also suggesting a likelihood).
-        \end{itemize}
-        \item Prior research often treated semantic change as a single phenomenon.
-        Hamilton et al.\ offered a novel approach by distinguishing between cultural shifts and linguistic drift using their two measures.
-    \end{itemize}
+Their method analyzed \emph{global shifts} in a word's vector semantics.
+Additionally, by plotting the time series of a word's distance to its neighboring words in the model's vector space, they visualized the period during which the semantic shift occurred.
+They demonstrated this for the word `cell' compared to its early neighbors, `closet' and `dungeon,' and the more recent neighbors, `phone' and `cordless.'
+For `cell,' the identified period of change (1985-2009), which interestingly coincides with the introduction and widespread adoption of cell phones by the public.
 
-    \item \para{Diachronic Analysis on Historical Data: }
-    The primary goal of Hamilton et al.\ (2016) is to track semantic changes and understand how the meanings of words shift in different historical contexts.
-    \begin{itemize}
-        \item They created word embeddings for different time periods using both the PPMI matrix with SVD and the SGNS model.
-        These embeddings were generated from historical text corpora to capture the contextual usage of words in each period.
-        \item After creating the embeddings, they aligned the embeddings.
-        Once the embeddings are aligned, they calculate the \emph{semantic displacement} of a word.
-        This essentially measured how much a word's vector representation has moved in the embedding space between two time periods.
-        \item The study demonstrates that their method effectively identified semantic change in words and uncovered two statistical `laws' of semantic change:
-        \begin{itemize}
-            \item \para{Law of Conformity}, which suggests that the rate of semantic change is inversely proportional to a word's frequency.
-            High-frequency words tend to change meaning more slowly.
-            \item \para{Law of Innovation}, on the other hand, proposes that words with multiple meanings are more likely to undergo semantic transformations over time.
-        \end{itemize}
-        \item They leveraged the rich information within word embeddings to quantify the degree of semantic change (semantic displacement) and identified potential patterns.
-    \end{itemize}
+\para{Pinpointing Significant Shifts Statistically.}
+Kulkarni et al.\ (2015) proposes a novel computational approach to identify and quantify the semantic and usage changes in words across various media (new products, movies and books).
+Building on the concept of distributed representations proposed by Hinton ~\cite{hinton1986learning}, they map words into a continuous vector space where words with similar meanings are positioned close together.
+The approach hinges on constructing \emph{property time series} for each word.
+They propose three methods for constructing these time series (\Cref{sec:paper_hamilton}):
+\begin{packed_enumerate}
+    \item \textbf{Frequency:}
+    This method analyzes changes in a word's overall frequency of use, assuming a sudden shift in frequency might indicate a semantic shift.
+    \item \textbf{Syntactic:}
+    This method examines the distribution of a word's part-of-speech tags (e.g., noun, verb) across different time periods, aiming to capture changes in how the word functions grammatically.
+    \item \textbf{Distributional:}
+    This approach leverages word embeddings which are created for each year, and then alignment is done to represent them in joint embedding space,
+    and it's utilized to construct distributional time series for a word's displacement.
+\end{packed_enumerate}
+Finally, they employed statistically sound \emph{change point detection algorithm} to identify significant moments in these time series, pinpointing the periods where word meaning or usage likely underwent a shift.
+Their results indicated that computational methods for the detection of semantic shifts can be robustly applied to time spans less than a decade.
 
-    \item \para{Semantic Shifts with Contextual Embeddings:}
-        Giulianelli et al.\ (2020) explored the phenomenon of lexical semantic change using an unsupervised approach using \emph{BERT}.
-        \begin{itemize}
-            \item They utilized the \emph{BERT} model to generate contextual word embeddings, which captured the meaning of a word based on its surrounding context.
-            \item The extracted word usage vectors are then clustered into different \emph{usage types} using the \emph{k-means clustering algorithm}.
-            This helped to identify distinct senses or meanings of the words as they appear in various contexts.
-            \item They analyzed these clusters for a specific word across different time periods.
-            The study proposed three metrics to quantify semantic change:
-            \begin{itemize}
-                \item \textbf{Entropy Difference (ED)}: Measures the change in uncertainty (entropy) of a word’s usage distribution over time.
-                \item \textbf{Jensen-Shannon Divergence (JSD)}: Compares the similarity of word usage distributions across time intervals.
-                \item \textbf{Average Pairwise Distance (APD)}: Computes the average distance between word usage vectors from different periods, indicating shifts in word meaning.
-            \end{itemize}
-            \item The qualitative analysis indicated that the approach could capture various linguistic phenomena, including both synchronic (current usage) and diachronic (historical changes) aspects.
-        \end{itemize}
+\para{Word Semantic Modelling of Polysemant.}
+Liao and Cheng (2016) explored the semantic changes of words.
+Their approach built on the understanding that word meaning is closely tied to its context.
+When a word's meaning changes, the surrounding words used with it \emph{(context words)} are likely to change as well.
+They focused on \emph{polysemous} words (words with multiple meanings) and aimed to detect when new meanings emerged.
 
-    \item \para{Semantic Similarity:} The impact of significant events like the COVID-19 pandemic on language and semantic change has also been a subject of study.
-    \begin{itemize}
-        \item Laurino et al.\ (2023) explores tracking fast semantic changes through a large-scale word association task, aiming to understand how the collective mental lexicon evolves in response to such global events.
-            Their research highlights the dynamic nature of language and how it incorporates new senses.
-        \item One key finding from their work is that words directly related to the pandemic exhibited a greater difference in semantic similarity between pre-pandemic and pandemic time periods.
-            This suggests that these words underwent a more significant and rapid semantic shift compared to control words not associated with the pandemic.
-            They also employ semantic similarity analysis to quantify the shifts in meaning for pandemic-related words and provides evidence that the COVID-19 pandemic acted as a catalyst for rapid semantic change.
-            For instance, words like `quarantine', `mask', and `social distancing' took on new and prominent meanings in everyday conversation.
-    \end{itemize}
-\end{itemize}
+They used the \emph{skip-gram architecture with negative sampling} ~\cite{10.5555/2999792.2999959} to obtain word embeddings.
+This technique helped in capturing the contextual meaning of words by representing them in a continuous vector space.
+They employed \emph{DBSCAN} to group word embeddings.
+DBSCAN helped in identifying clusters of similar word contexts and distinguishing them from noise, which could indicate semantic changes.
+To find similar words, they used a nearest neighbor search method called \emph{Random Project Forest}.
+This method helped in identifying words that are contextually similar to a given word.
+ Finally, they compared the stability of \emph{similar words} with the stability of their \emph{context words}.
+
+\para{Distinguishing Cultural Shifts from Linguistic Drift.}
+Hamilton et al.\ (2016) addressed the challenge of distinguishing between \emph{cultural shifts} and \emph{linguistic drift}, both of which can contribute to semantic change.
+They proposed two distinct measures based on distributional semantics to distinguish between these two types of semantic change:
+\begin{packed_enumerate}
+    \item \textbf{Local Neighborhood Measure:}
+    This measure focused on the closest neighbors (most similar words) in a word's embedding.
+    A drastic shift in these nearest neighbors suggests a significant change in core meaning, potentially driven by a \emph{cultural shift}
+    (e.g., `gay' changing from carefree to referring to homosexuality).
+    \item \textbf{Global Measure:}
+    This measure considered the overall distribution of a word's surrounding words in a larger context window.
+    Gradual changes in this broader distribution are more likely to reflect \emph{linguistic drift}, the natural evolution of language due to regular processes
+    (e.g., `promise' expanding from a declaration to also suggesting a likelihood).
+\end{packed_enumerate}
+Prior research often treated semantic change as a single phenomenon.
+Hamilton et al.\ offered a novel approach by distinguishing between cultural shifts and linguistic drift using their two measures.
+
+\para{Diachronic Analysis on Historical Data: }
+The primary goal of Hamilton et al.\ (2016) is to track semantic changes and understand how the meanings of words shift in different historical contexts.
+They created word embeddings for different time periods using both the PPMI matrix with SVD and the SGNS model.
+These embeddings were generated from historical text corpora to capture the contextual usage of words in each period.
+After creating the embeddings, they aligned the embeddings.
+Once the embeddings are aligned, they calculate the \emph{semantic displacement} of a word.
+This essentially measured how much a word's vector representation has moved in the embedding space between two time periods.
+The study demonstrates that their method effectively identified semantic change in words and uncovered two statistical `laws' of semantic change:
+\begin{packed_enumerate}
+    \item \textbf{Law of Conformity}, which suggests that the rate of semantic change is inversely proportional to a word's frequency.
+    High-frequency words tend to change meaning more slowly.
+    \item \textbf{Law of Innovation}, on the other hand, proposes that words with multiple meanings are more likely to undergo semantic transformations over time.
+\end{packed_enumerate}
+They leveraged the rich information within word embeddings to quantify the degree of semantic change (semantic displacement) and identified potential patterns.
+
+\para{Semantic Shifts with Contextual Embeddings:}
+Giulianelli et al.\ (2020) explored the phenomenon of lexical semantic change using an unsupervised approach using \emph{BERT}.
+They utilized the \emph{BERT} model to generate contextual word embeddings, which captured the meaning of a word based on its surrounding context.
+The extracted word usage vectors are then clustered into different \emph{usage types} using the \emph{k-means clustering algorithm}.
+This helped to identify distinct senses or meanings of the words as they appear in various contexts.
+They analyzed these clusters for a specific word across different time periods.
+The study proposed three metrics to quantify semantic change:
+\begin{packed_enumerate}
+    \item \textbf{Entropy Difference (ED)}: Measures the change in uncertainty (entropy) of a word’s usage distribution over time.
+    \item \textbf{Jensen-Shannon Divergence (JSD)}: Compares the similarity of word usage distributions across time intervals.
+    \item \textbf{Average Pairwise Distance (APD)}: Computes the average distance between word usage vectors from different periods, indicating shifts in word meaning.
+\end{packed_enumerate}
+The qualitative analysis indicated that the approach could capture various linguistic phenomena, including both synchronic (current usage) and diachronic (historical changes) aspects.
+
+\para{Semantic Similarity:}
+The impact of significant events like the COVID-19 pandemic on language and semantic change has also been a subject of study.
+Laurino et al.\ (2023) explores tracking fast semantic changes through a large-scale word association task, aiming to understand how the collective mental lexicon evolves in response to such global events.
+Their research highlights the dynamic nature of language and how it incorporates new senses.
+One key finding from their work is that words directly related to the pandemic exhibited a greater difference in semantic similarity between pre-pandemic and pandemic time periods.
+This suggests that these words underwent a more significant and rapid semantic shift compared to control words not associated with the pandemic.
+They also employ semantic similarity analysis to quantify the shifts in meaning for pandemic-related words and provides evidence that the COVID-19 pandemic acted as a catalyst for rapid semantic change.
+For instance, words like `quarantine', `mask', and `social distancing' took on new and prominent meanings in everyday conversation.
+
+\subsection{Takeaways}\label{subsec:semantic-takeaways}
+Existing research on semantic change detection employs a diverse range of methods.
+Traditional approaches rely on frequency analysis, such as log ratio computations, while more recent studies leverage advanced distributional semantics, including word embeddings generated by techniques like SGNS, PPMI, and SVD.
+Clustering algorithms like DBSCAN and contextual embeddings have also been explored.
+These methods have successfully identified semantic shifts in corpora spanning from the 19th to the 21st centuries, revealing changes in word meanings and usage.
+Despite these advancements, challenges persist, such as the limited availability of methods for languages other than English and the requirement for large datasets.
+Developing algorithms capable of detecting semantic change in smaller corpora is an important area for future research.
 
 % ------------------------------------------------------------------ SYNTACTIC ------------------------------------------------------------------
+\subsection{Syntactic Alterations} \label{subsec:syntactic-alterations}
 \para{Linguistic change studies have shifted to include \emph{syntax} alongside semantics.}
 The field of linguistic change has traditionally focused on \emph{semantics}.
 However, recent studies have begun to explore the role of \emph{syntax} in language evolution as well.
 The \emph{syntactic} functionality of a word can evolve by transitioning into a new part-of-speech (POS) category.
 Nouns, due to their inherent flexibility in meaning, exhibit a greater tendency to undergo these changes driven by cultural shifts.
-While verbs are more likely to participate in gradual semantic changes that follow established linguistic patterns.
-\vspace{0mm}
-\begin{itemize}
-    \item \para{Acquiring a new POS.}
-    Kulkarni et al.\ assigned part-of-speech (POS) tags to a large collection of text.
-    They calculated the likelihood of a word appearing in specific grammatical contexts over time.
-    \begin{itemize}
-        \item To quantify temporal change, they compared the probability distributions of POS tags for a particular word across different time periods.
-        This essentially measured the divergence between these distributions.
-        \item An example they cited was the word `windows'.
-        Its POS tag shifted from a common noun (referring to doors and windows of a house) to a proper noun (`Microsoft Windows').
-        This highlights how a word's grammatical function can change alongside its meaning.
-    \end{itemize}
+While verbs are more likely to participate in gradual semantic changes that follow established linguistic patterns. \cite{hamilton-etal-2016-cultural, hamilton-etal-2016-diachronic}
 
-    \item \para{Capturing Differences Between Nouns and Verbs.}
-     Hamilton et al.\ (2016) highlight how \emph{cultural changes}, often influenced by new technologies, are closely tied to transformations within \emph{local neighborhoods}, particularly sensitive to shifts in nouns.
-     On the other hand, \emph{linguistic changes} are more associated with \emph{global measures} and are particularly responsive to variations in verbs.
-     \begin{itemize}
-         \item To validate this hypothesis, the authors employed a statistical technique called a \emph{linear mixed model} where word type (noun or verb) is a fixed effect,
-         amount of change measured by each metric (local or global) treated as the dependent variable.
-         By analyzing the model's results, they could assess whether there's a significant difference in the way nouns and verbs exhibit change.
-         \item The evolution of words like `actually', `must', and `promise' demonstrate these changes.
-         For instance, `must' has transitioned from expressing obligation to indicating necessity, showcasing a common pattern seen in modal verbs.
-     \end{itemize}
-\end{itemize}
+\para{Acquiring a new POS.}
+Kulkarni et al.\ assigned part-of-speech (POS) tags to a large collection of text.
+They calculated the likelihood of a word appearing in specific grammatical contexts over time.
+To quantify temporal change, they compared the probability distributions of POS tags for a particular word across different time periods.
+This essentially measured the divergence between these distributions.
+An example they cited was the word `windows'.
+Its POS tag shifted from a common noun (referring to doors and windows of a house) to a proper noun (`Microsoft Windows').
+This highlights how a word's grammatical function can change alongside its meaning.
+
+\para{Capturing Differences Between Nouns and Verbs.}
+Hamilton et al.\ (2016) highlight how \emph{cultural changes}, often influenced by new technologies, are closely tied to transformations within \emph{local neighborhoods}, particularly sensitive to shifts in nouns.
+On the other hand, \emph{linguistic changes} are more associated with \emph{global measures} and are particularly responsive to variations in verbs.
+
+To validate this hypothesis, the authors employed a statistical technique called a \emph{linear mixed model} where word type (noun or verb) is a fixed effect,
+amount of change measured by each metric (local or global) treated as the dependent variable.
+By analyzing the model's results, they could assess whether there's a significant difference in the way nouns and verbs exhibit change.
+The evolution of words like `actually', `must', and `promise' demonstrate these changes.
+For instance, `must' has transitioned from expressing obligation to indicating necessity, showcasing a common pattern seen in modal verbs.
+
+\subsection{Takeaways}
+While research in semantic change has advanced, syntactic change remains relatively understudied.
+Kulkarni et al.\ (2015) utilized syntactic analysis through part-of-speech (POS) tagging to observe changes in word usage patterns, emphasizing shifts in syntactic roles over time.
+Hamilton et al.\ (2016) linked syntactic changes to broader cultural shifts, analyzing the evolution of nouns and verbs.
+Their study demonstrated how cultural shifts influenced language use, with certain syntactic changes correlating with broader societal trends.
+However, these studies only scratch the surface of syntactic change, with areas like broadening, narrowing, and amelioration largely unexplored.
+A more comprehensive understanding of language evolution necessitates a deeper dive into syntactic processes and their interplay with semantic shifts.
 
 % ------------------------------------------------------------------ THREE PAPERS ------------------------------------------------------------------
+\subsection{Selected Papers}\label{subsec:selected-papers}
 Several studies from our literature review provide valuable insights for addressing data voids in our analysis.
-\begin{itemize}
-    \item The first being the work by Kulkarni et al.\ which introduces us to time series construction.
+The first being the work by Kulkarni et al.\ which introduces us to time series construction.
 Their distributional methods focuses on finding subtle semantic shits to determine the context where a word in used.
 This concept aligns perfectly with our goal of uncovering shifts in word usage when encountering data voids.
-    \item Second paper by Hamilton et al.\ introduces us to word emebeddings alignment.
+
+Second paper by Hamilton et al.\ introduces us to word emebeddings alignment.
 Since we want to compare word vectors from different time periods, vectors should be aligned in same coordinate axes.
 After aligning the embeddings for individual time periods, we can use the aligned word vectors to compute the semantic displacement that a word has undergone during a certain time-period.
-%    \item Third one by Laurino et al.\ investigates the impact of the COVID-19 pandemic on word meaning.
-%One key finding from their work is that words directly related to the pandemic exhibited a greater difference in semantic similarity between pre-pandemic and pandemic time periods.
-%This suggests that these words underwent a more significant and rapid semantic shift compared to control words not associated with the pandemic.
-%They also employ semantic similarity analysis to quantify the shifts in meaning for pandemic-related words and provides evidence that the COVID-19 pandemic acted as a catalyst for rapid semantic change.
-\end{itemize}
+Next two section \Cref{sec:paper_kulkarni}, \Cref{sec:paper_hamilton} focusses on the selected papers in detail.
