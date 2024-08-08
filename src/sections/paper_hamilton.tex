@@ -26,53 +26,54 @@ This paper, however, focuses on following two specific questions about semantic 
     If a word has multiple meanings, it is more likely to lead to semantic change, especially in the case of rare senses.
 \end{itemize}
 
-The paper aims to develop a robust methodology for quantifying semantic change using word embeddings and comparing different approaches to analyzing semantic change.
-This methodology is then applied in a large-scale cross-linguistic analysis spanning 200 years and four languages (English, German, French, and Chinese) to propose the above two statistical laws relating frequency and polysemy to semantic change.
+In our work on data voids, we have recognized that word frequency significantly impacts their identification.
+For instance, the term `sandy' saw a spike in usage during the Hurricane Sandy event.
+Similarly, terms associated with political agendas also experience increased usage during relevant events.
+This paper provides insights into how frequency influences the evolution of word meanings.
 
-\subsection{Constructing Word Embeddings.}\label{subsec:constructing-word-embeddings.}
+Additionally, our study identifies data voids involving polysemous terms, such as `migrant caravan.'
+This term began to change in meaning when FOX News used it to describe people moving from the Mexico border towards the US, and it continued to evolve with new groups of migrants.
+Understanding these kinds of data voids is crucial, and this paper helps us identify subtle semantic changes in words with multiple meanings,
+enhancing our understanding of how these changes relate to frequency and context.
+
+The paper aims to develop a robust methodology for quantifying semantic change using word embeddings and comparing different approaches to analyzing semantic change.
+This methodology is then applied in a large-scale cross-linguistic analysis spanning 200 years and four languages
+(English, German, French, and Chinese) to propose the above two statistical laws relating frequency and polysemy to semantic change.
+
+\subsection{Constructing Word Embeddings.}\label{subsec:constructing-word-embeddings}
 The authors employ three methods to construct word embeddings for different time periods.
 Initially, they create embeddings for each distinct period and then align these embeddings over time to maintain consistency.
 To quantify semantic change, they use various metrics.
 Specifically, they utilize Singular Value Decomposition (SVD), Positive Pointwise Mutual Information (PPMI), and Skip-Gram with Negative Sampling (SGNS).
 These distributional techniques represent each word by a vector that encapsulates information about the word’s co-occurrence statistics.
 
-\begin{enumerate}
-    \item
-\para{PPMI: }
+\para{Positive Pointwise Mutual Information (PPMI). }
 PPMI is a statistical measure used to quantify the association between a word and its context within a corpus.
 In the paper, it is used to create word embeddings by capturing the strength of association between words and their co-occurring contexts over time.
 
+First, a co-occurrence matrix is built, where each entry represents the frequency with which a word (target) and its context (typically a window of neighboring words) appear together in the corpus.
+The \emph{joint probability} of a target word $w_i$ and a context word $c_j$ is calculated by dividing the co-occurrence frequency of $w_i$ and $c_j$ by the total number of word pairs in the corpus.
+The \emph{marginal probability} of the target word $w_i$ and the context word $c_j$ are calculated based on the total occurrences of each word in the corpus.
+The Positive Pointwise Mutual Information (PPMI) between the target word $w_i$ and the context word $c_j$ is calculated using the formula:
+\begin{equation}
+\mathbf{M}^{\text{PPMI}}_{i,j} = \max \left\{ \log \left( \frac{\hat{p}(w_i, c_j)}{\hat{p}(w_i) \hat{p}(c_j)} \right) - \alpha, 0 \right\},
+\label{eq:ppmi}
+\end{equation}
+
+where:
 \begin{itemize}
-    \item \para{Co-occurrence Matrix Construction.}
-    First, a co-occurrence matrix is built, where each entry represents the frequency with which a word (target) and its context (typically a window of neighboring words) appear together in the corpus.
-    \item \para{Joint Probability Calculation.}
-    The joint probability of a target word $w_i$ and a context word $c_j$ is calculated by dividing the co-occurrence frequency of $w_i$ and $c_j$ by the total number of word pairs in the corpus.
-    \item \para{Marginal Probability Calculation.}
-    The marginal probabilities of the target word $w_i$ and the context word $c_j$ are calculated based on the total occurrences of each word in the corpus.
-    \item \para{Calculating PPMI.}
-    The Positive Pointwise Mutual Information (PPMI) between the target word $w_i$ and the context word $c_j$ is calculated using the formula:
-
-    \begin{equation}
-    \mathbf{M}^{\text{PPMI}}_{i,j} = \max \left\{ \log \left( \frac{\hat{p}(w_i, c_j)}{\hat{p}(w_i) \hat{p}(c_j)} \right) - \alpha, 0 \right\},
-    \label{eq:ppmi}
-    \end{equation}
-
-    where:
-    \begin{itemize}
-    \item $\hat{p}(w_i, c_j)$ is the estimated \emph{joint probability} of the target word $w_i$ and the context word $c_j$ occurring together.
-    \item $\hat{p}(w_i)$ and $\hat{p}(c_j)$ are the estimated \emph{marginal probabilities} of the target word $w_i$ and the context word $c_j$, respectively.
-    \item $\alpha > 0$ is a positive constant used to smooth the values and prevent extreme positive values in the PPMI calculation.
-    \end{itemize}
-    This formula refines the PPMI measure by incorporating $\alpha$ to adjust the log probability ratio.
-    The inclusion of $\alpha$ helps manage the sparseness of the data and the impact of low-frequency events, making the measure more robust and stable.
+\item $\hat{p}(w_i, c_j)$ is the \emph{joint probability} of the target word $w_i$ and the context word $c_j$ occurring together.
+\item $\hat{p}(w_i)$ and $\hat{p}(c_j)$ are the \emph{marginal probabilities} of the target word $w_i$ and the context word $c_j$, respectively.
+\item $\alpha > 0$ is a positive constant used to smooth the values and prevent extreme positive values in the PPMI calculation.
 \end{itemize}
 
-    \item
-\para{SVD: }
+This formula refines the PPMI measure by incorporating $\alpha$ to adjust the log probability ratio.
+The inclusion of $\alpha$ helps manage the sparseness of the data and the impact of low-frequency events, making the measure more robust and stable.
+
+\para{Singular Value Decomposition (SVD). }
 SVD is a mathematical technique that factorizes a matrix into three other matrices, revealing important features of the original matrix.
 In the context of word embeddings, SVD helps to reduce the dimensionality of the data while preserving the essential structure and patterns in word co-occurrences.
 SVD decomposes the co-occurrence matrix into three matrices in the following manner:
-
 \begin{equation}
 \mathbf{w}_i^{\text{SVD}} = (\mathbf{U} \Sigma^\gamma)_i,
 \label{eq:svd}
@@ -89,66 +90,66 @@ where:
 In this formula, the word vector $\mathbf{w}_i^{\text{SVD}}$ is derived by scaling the singular values in $\Sigma$ by $\gamma$ and then multiplying by the corresponding vectors in $\mathbf{U}$.
 This approach provides a flexible way to adjust the contribution of the components to the final word embeddings.
 
-    \item
-\para{SGNS: }
+\para{Skip-Gram with Negative Sampling (SGNS). }
 SGNS is a technique used to learn high-quality word vectors by training on large corpora.
 The primary goal of SGNS is to learn word embeddings such that words that appear in similar contexts have similar vector representations.
-\\
-For a given target word  w  and a context word  c , the model tries to maximize the probability  P(c|w)
-
+For a given target word $w$ and a context word $c$, the model tries to maximize the probability $P(c|w)$
 \begin{equation}
 \hat{p}(c_i \mid w_i) \propto \exp(\mathbf{w}_i^{\text{SGNS}} \cdot \mathbf{c}_j^{\text{SGNS}}),
 \label{eq:sgns}
 \end{equation}
 
 where:
-
 \begin{itemize}
     \item $\hat{p}(c_i \mid w_i)$ is the estimated probability of a context word $c_i$ given a target word $w_i$.
     \item $\mathbf{w}_i^{\text{SGNS}}$ is the vector representation of the target word $w_i$ in the SGNS embedding space.
     \item $\mathbf{c}_j^{\text{SGNS}}$ is the vector representation of the context word $c_j$ in the SGNS embedding space.
 \end{itemize}
 
-\\
 The probability $\hat{p}(c_i \mid w_i)$ that a word $c_i$ is a context word of $w_i$ is proportional to the exponential of the dot product of their corresponding vector representations.
 The dot product $\mathbf{w}_i^{\text{SGNS}} \cdot \mathbf{c}_j^{\text{SGNS}}$ measures the similarity between the target word and the context word in the vector space.
-A higher dot product indicates that the words are more likely to co-occur, leading to a higher estimated probability.\\
+A higher dot product indicates that the words are more likely to co-occur, leading to a higher estimated probability.
 
-The model uses this probability estimation to distinguish true word-context pairs from randomly sampled "negative" pairs.
+The model uses this probability estimation to distinguish true word-context pairs from randomly sampled negative pairs.
 The training objective is to maximize the probability of observed (target, context) pairs and minimize the probability of randomly sampled pairs, thereby learning embeddings that reflect the semantic relationships between words.
 
-\end{enumerate}
-
-\subsection{Aligning Embeddings}\label{subsec:aligning-embeddings}
+\para{Aligning Embeddings.}
 Since the embeddings are trained independently for each time period, their vector spaces may not be directly comparable.
 The paper addresses this by aligning the embeddings from different time periods.
-They aligned the emebddings across time periods using orthogonal Procrustes, which transforms the embeddings to minimize the distances between corresponding words in different periods.
+They aligned the emebddings across time periods, which transforms the embeddings to minimize the distances between corresponding words in different periods.
 This step ensures that similar meanings are represented similarly across time.
 
-\subsection{Measuring Semantic Change}\label{subsec:measuring-semantic-change}
-Once the embeddings are aligned, following methods are performed to quantify how much the meaning of word changes over time.
-\begin{itemize}
-    \item \para{Pair-wise similarity time-series}
-        This method measures changes in the similarity between pairs of words over different time periods using cosine similarity.
-        \begin{equation}
-            s^{(t)}(w_i, w_j) = \text{cos-sim}(w_i^{(t)}, w_j^{(t)})
-            \label{eq:equation2}
-        \end{equation}
-        The Spearman correlation $(\rho)$ is employed to measure the relationship between the similarity scores of word pairs and time.
-        This non-parametric method assesses whether the similarity series shows a significant increase or decrease over time, which is crucial for understanding semantic shifts.
+\subsection{Takeaways}\label{subsec:hamilton_takeaways1}
+The authors created three types of word embeddings using PPMI, SVD, and SGNS, each capturing different information.
+PPMI measures how closely related two words are, resulting in sparse, high-dimensional vectors.
+SVD simplifies this information by reducing the dimensionality of the PPMI matrix into dense, low-dimensional vectors.
+Lastly, SGNS learns embeddings by predicting surrounding words in a given context, uncovering deeper semantic and contextual nuances that the other methods may not capture.
+Additionally, they employed alignment technique to align word embeddings across different time periods, ensuring consistency and enabling the analysis of semantic shifts over time.
 
-    \item \para{Measuring semantic displacement}
-        This method quantifies how much a word's meaning has changed by calculating the displacement of its vector representation across different time points.
-        They use the aligned word vectors to compute the \emph{semantic displacement} that a word has undergone during a certain time-period.
-        It is measured by calculating the distance between the vector representations of a word in different time periods.
-        For a given word $w$, if $\mathbf{w}^{(t1)}$ and $\mathbf{w}^{(t2)}$ are its embeddings in two time periods $t1$ and $t2$, respectively, then the semantic displacement $\Delta$ is computed as:
-        \begin{equation}
-            \Delta(w) = \text{cos-dist}(\mathbf{w}^{(t1)}, \mathbf{w}^{(t2)}).\label{eq:equation3}
-        \end{equation}
-\end{itemize}
+%\subsection{Measuring Semantic Change}\label{subsec:measuring-semantic-change}
+%Once the embeddings are aligned, following methods are performed to quantify how much the meaning of word changes over time.
+%\begin{itemize}
+%    \item \para{Pair-wise similarity time-series}
+%        This method measures changes in the similarity between pairs of words over different time periods using cosine similarity.
+%        \begin{equation}
+%            s^{(t)}(w_i, w_j) = \text{cos-sim}(w_i^{(t)}, w_j^{(t)})
+%            \label{eq:equation2}
+%        \end{equation}
+%        The Spearman correlation $(\rho)$ is employed to measure the relationship between the similarity scores of word pairs and time.
+%        This non-parametric method assesses whether the similarity series shows a significant increase or decrease over time, which is crucial for understanding semantic shifts.
+%
+%    \item \para{Measuring semantic displacement}
+%        This method quantifies how much a word's meaning has changed by calculating the displacement of its vector representation across different time points.
+%        They use the aligned word vectors to compute the \emph{semantic displacement} that a word has undergone during a certain time-period.
+%        It is measured by calculating the distance between the vector representations of a word in different time periods.
+%        For a given word $w$, if $\mathbf{w}^{(t1)}$ and $\mathbf{w}^{(t2)}$ are its embeddings in two time periods $t1$ and $t2$, respectively, then the semantic displacement $\Delta$ is computed as:
+%        \begin{equation}
+%            \Delta(w) = \text{cos-dist}(\mathbf{w}^{(t1)}, \mathbf{w}^{(t2)}).\label{eq:equation3}
+%        \end{equation}
+%\end{itemize}
 
-\subsection{Evaluation of various approaches}
-They compared the different approaches discussed in \Cref{subsec:methods-for-quantifying-semantic-change} on \emph{synchronic accuracy} (similarity within time-period) and \emph{diachronic validity} (semantic changes over time).
+\subsection{Evaluation \& Results}
+They compared the different approaches discussed in \Cref{subsec:constructing-word-embeddings} on \emph{synchronic accuracy} (similarity within time-period) and \emph{diachronic validity} (semantic changes over time).
 \begin{itemize}
     \item \para{Synchronic Accuracy}
     Synchronic accuracy refers to the accuracy with which word embeddings capture the semantic relationships and meanings of words at a \emph{specific point in time}.
@@ -157,13 +158,13 @@ They compared the different approaches discussed in \Cref{subsec:methods-for-qua
     \item \para{Diachronic Validity}
     Diachronic validity evaluates how effectively the methods can detect and quantify changes in \emph{meaning over time}.
     It involves testing the methods against historical data to see if they can accurately identify known shifts in word meanings.
-    SGNS perfomed best on both of the tasks:
+    The results indicated that SGNS was particularly effective in capturing these shifts, followed by SVD and PPMI.
     \begin{itemize}
         \item \textbf{Detecting Known Shifts.}
         The goal in this task is for the methods to correctly capture whether pairs of words moved closer or further apart in semantic space during a pre-determined time-period.
 
         \item \textbf{Discovering Shifts from data.}
-        Tested whether the methods discover reasonable shifts by examining the top-10 words that changed the most from the 1900s to the 1990s according to the semantic displacement metric (\Cref{subsec:methods-for-quantifying-semantic-change}).
+        Tested whether the methods discover reasonable shifts by examining the top-10 words that changed the most from the 1900s to the 1990s according to the semantic displacement metric.
     \end{itemize}
 
 \end{itemize}
@@ -185,7 +186,6 @@ How diachronic embeddings can be used to reveal statistical laws that relate fre
 
 \subsection{Takeaways}
 This paper explores how different types of word embedding models, such as PPMI, SVD, and SGNS, can be used to study diachronic shifts in word meanings.
-It demonstrates the use of metrics like Spearman correlation to quantify semantic drift and employs Procrustes alignment techniques to align word embeddings across different time periods.
 By analyzing these aligned embeddings, the authors identify two key statistical laws of semantic change.
 These findings provide a quantitative framework for understanding how and why languages evolve over time.
 
