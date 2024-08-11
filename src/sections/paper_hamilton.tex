@@ -148,7 +148,7 @@ Additionally, they employed alignment technique to align word embeddings across 
 %        \end{equation}
 %\end{itemize}
 
-\subsection{Evaluation \& Results}
+\subsection{Evaluation \& Results}\label{subsec:evaluation&results}
 They compared the different approaches discussed in \Cref{subsec:constructing-word-embeddings} on \emph{synchronic accuracy} (similarity within time-period) and \emph{diachronic validity} (semantic changes over time).
 \begin{itemize}
     \item \para{Synchronic Accuracy}
@@ -158,7 +158,7 @@ They compared the different approaches discussed in \Cref{subsec:constructing-wo
     \item \para{Diachronic Validity}
     Diachronic validity evaluates how effectively the methods can detect and quantify changes in \emph{meaning over time}.
     It involves testing the methods against historical data to see if they can accurately identify known shifts in word meanings.
-    The results indicated that SGNS was particularly effective in capturing these shifts, followed by SVD and PPMI.
+    The results indicated that SGNS was particularly effective in capturing these shifts, followed by SVD and PPMI\@.
     \begin{itemize}
         \item \textbf{Detecting Known Shifts.}
         The goal in this task is for the methods to correctly capture whether pairs of words moved closer or further apart in semantic space during a pre-determined time-period.
@@ -169,7 +169,7 @@ They compared the different approaches discussed in \Cref{subsec:constructing-wo
 
 \end{itemize}
 
-\subsection{Statistical Laws of Semantic Change}
+\subsection{Statistical Laws of Semantic Change}\label{subsec:statistical-laws-of-semantic-change}
 The authors establish two statistical laws of semantic change by analyzing a large dataset across multiple languages and time periods.
 They demonstrate these laws by involving the comparison of different word embedding models (PPMI, SVD, SGNS) against known historical semantic shifts and novel benchmarks.
 
@@ -184,7 +184,7 @@ How diachronic embeddings can be used to reveal statistical laws that relate fre
     The study finds that these words show larger semantic displacements, indicating more significant changes in meaning over time.
 \end{itemize}
 
-\subsection{Takeaways}
+\subsection{Takeaways}\label{subsec:takeaways4}
 This paper explores how different types of word embedding models, such as PPMI, SVD, and SGNS, can be used to study diachronic shifts in word meanings.
 By analyzing these aligned embeddings, the authors identify two key statistical laws of semantic change.
 These findings provide a quantitative framework for understanding how and why languages evolve over time.

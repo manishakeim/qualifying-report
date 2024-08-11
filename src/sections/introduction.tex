@@ -3,56 +3,51 @@
 
 \section{Introduction} \label{sec:introduction}
 Language is a dynamic, living entity that continually adapts to reflect the changing world around us.
-With the evolving language, words take on new meanings or connotations with technological advancements,
-social and cultural shifts, generational differences, globalization, political and social movements, etc.
-The particular words when get emerged in political context are known as data voids.
-Since, they have the behavior of changing meaning over time.
-There can be "voids" in the meaning of words or concepts, especially in specific contexts like politics.
-When a word's meaning shifts rapidly or becomes ambiguous, it can create a kind of "data void" for analysis or understanding.
+With the evolving language, words take on new meanings through technological advancements, cultural shifts, and political movements.
 
-Data voids in political contexts often occur when terms or phrases take on new or altered meanings,
-particularly when these changes are driven by political actors or movements.
+Particularly in political contexts, certain words or phrases can experience rapid shifts in meaning or become ambiguous.
+These are known as `data voids' - situations where the meaning of a term has become unstable or contested, often due to deliberate efforts by political actors to redefine it.
 
-This type of data void is especially significant because:
+Unlike more general language evolution, where new terms emerge to describe novel concepts, data voids in politics involve the strategic manipulation of existing vocabulary.
+Political actors may repurpose words or introduce new phrases to frame debates in their favor, creating confusion and a lack of shared understanding.
 
-Rapid meaning shifts: Political events or campaigns can cause sudden changes in how certain terms are used or interpreted.
-Intentional manipulation: Political actors may deliberately redefine terms or introduce new phrases to frame debates in their favor.
-Polarization of language: Words or phrases can take on drastically different meanings in different political contexts or for different groups.
-Dog whistles: Some terms may develop coded political meanings that aren't immediately apparent to all audiences.
-Weaponization of ambiguity: The lack of clear, authoritative information about a term's new political meaning can be exploited to spread misinformation or propaganda.
+This phenomenon highlights how language can be weaponized as a political tool.
+As terms take on drastically different meanings for different groups, it can become challenging to maintain clear, authoritative information about their usage.
+The resulting `data voids' can then be exploited to spread misinformation or propaganda.
 
-Media manipulators often manipulate language to shape public opinion.
-Words are carefully chosen to present a particular viewpoint.
-Changes in political ideologies can alter the meaning of terms.
-Broader societal shifts influence political discourse.
+My research goal is to find data voids in political context automatically and systematically study how word shifts their meaning over time.
+To achieve this, we have selected following research papers as a foundation for our research.
 
-These elements can rapidly change the connotations and denotations of words, making them challenging to track and analyze.
-
-data void isn't just about a lack of information, but about the potential for confusion, manipulation, or misinformation as terms are redefined or recontextualized in the political sphere.
-
-This type of data void highlights the dynamic nature of language in political discourse and the challenges it presents for maintaining shared understanding in public debates.
-It also underscores the importance of being aware of how language can be used as a political tool.
-
-
-
-The following papers has been selected to explore this phenomenon.
 \begin{itemize}
     \item Statistically Significant Detection of Linguistic Change.
-    ACM WWW 2014 ~\cite{kulkarni2014statisticallysignificantdetectionlinguistic}
+    ACM WWW 2015 ~\cite{kulkarni2014statisticallysignificantdetectionlinguistic}
     \item Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change.
     ACL 2016 ~\cite{hamilton-etal-2016-diachronic}
 \end{itemize}
 
-\subsection{What is a Data Void?}\label{subsec:what-is-a-data-void?}
-Data voids, as first introduced by Golebiewski and Boyd \cite{unknown},
-are identified while searching terms for which relevant information is either limited, non-existent, or deeply problematic.
-\\
-For example, unlike a typical web search for `basketball' that yields a vast amount of data,
-data voids present a problematic scenario such as searches on these terms may return no results or irrelevant, often inaccurate information.
-This situation could prompt users to pursue information, click on misleading search outcomes, and be exposed to false or misleading content,
-ultimately shaping their perceptions and beliefs with misinformation.
+The concept of context drift, as presented in these papers, refers to the change in the contextual usage of words over time.
+This can be particularly useful for detecting and analyzing data voids in political contexts.
 
-Data Voids often originate in fringe communities.
-When vulnerable users search for information using this term, they may encounter results that are misrepresentations of the topic, as these fringe communities have already shaped the narrative.
-Mainstream media, particularly those with far-left or far-right biases, may pick up and amplify these narratives, contributing to the misinformation cycle.
+Finding data voids is significantlly important because
+political events or campaigns can cause sudden changes in how certain terms are used or interpreted.
+Political actors may deliberately redefine terms or introduce new phrases to frame debates in their favor.
+Words or phrases can take on drastically different meanings in different political contexts or for different groups.
+Some terms may develop coded political meanings that aren't immediately apparent to all audiences.
+The lack of clear, authoritative information about a term's new political meaning can be exploited to spread misinformation or propaganda.
 
+These elements can rapidly change the basic meaning (denotation) and the feelings or ideas they evoke (connotation) of words, making them challenging to track and analyze.
+
+\para{Example.}
+The term \emph{crisis actor} has undergone a significant shift in meaning,
+exemplifying the phenomenon of context drift we've been discussing.
+
+Originally this term was used in the entertainment and training industries,
+which refers to individuals hired to portray victims or other roles in simulated emergency scenarios.
+These simulations were used for training first responders, military personnel, or for other educational purposes.
+
+However, in recent years, the term has been full of misinformation which refers to genuine victims of violent events (mass shooting) in an attempt to prove that an event was staged or did not happen.
+This term got prominent during Sandy Hook Elementary School shooting (2012), Los Angeles International Airport (LAX) shooting (2013), Pulse Nightclub shooting in Orlando (2016), Las Vegas shooting (2017).
+
+This example clearly demonstrates how a term with a specific, legitimate meaning can be repurposed to spread misinformation and conspiracy theories.
+The shift creates a potential data void where searches for \emph{crisis actor} might lead to a mix of factual information about emergency training and harmful conspiracy theories,
+making it difficult for users to distinguish accurate information.

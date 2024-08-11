@@ -60,7 +60,7 @@ Kulkarni et al.\ propose several methods to create this time series, aimed at un
     \label{fig:kulkarni-overview}
 \end{figure}
 
-\para{Construction of Time Series.}
+\para{Construction of time series.}
 In this paper, three methods are explored for statistically modeling the evolution of words over time:
 frequency analysis, part-of-speech tagging, and word co-occurrence to create time series for each word.
 
@@ -73,7 +73,7 @@ frequency analysis, part-of-speech tagging, and word co-occurrence to create tim
     \label{fig:example-gay}
 \end{wrapfigure}
 
-\para{Frequency-based method.}
+\para{Frequency method.}
 The simplest and most direct method for detecting sudden changes in word usage is by analyzing frequency trends.
 This approach examines how often a word is used over a given period, providing insights into shifts in its popularity or relevance.
 Changes in frequency can indicate whether a word is gaining new meanings or losing old ones, reflecting broader cultural or societal trends.
@@ -116,10 +116,20 @@ Initially, the word `tape' referred to an `adhesive tape' but underwent a semant
 \subsection{Takeaways}\label{subsec:takeaways}
 For the first research question, Kulkarni et al.\ (2015) explored multiple dimensions of word usage change over time.
 To address this, they constructed three types of time series: frequency-based, syntactic, and distributional.
-Among these, the distributional time series proved most insightful, as it captures the contextual usage of word.
+
+Frequency-based method relies on analyzing the frequency of word usage over time.
+It provides immediate insights into trends and spikes in word usage.
+However, the frequency method is prone to sampling errors, it may indicate a change in frequency without a significant shift in meaning,
+as seen with the word `Hurricane' during events like Hurricane Sandy, where frequency increased but meaning remained stable.
+Syntactic-based method analyzes the part of speech (POS) tags of words to detect changes in their syntactic roles over time.
+Distributional-based method is based on the fact that words appearing in similar contexts are semantically similar.
+
+Among the three methods employed by Kulkarni et al.\ (2015) for constructing time series,
+the distributional time series proved most insightful, as it captures the contextual usage of word.
 This approach utilized word embeddings to capture the semantic context of a word within specific time periods.
-Subsequently, these embeddings were aligned into a unified space,
-and it relied on assumptions about word stability and embedding space linearity.
+
+The syntactic method, while reliable in detecting changes in part-of-speech tags, may overlook significant shifts due to its reliance on linguistic taggers.
+At the time of the study, this posed a challenge due to the limitations of tagging accuracy, which has since improved significantly with the advent of more advanced methods for annotating datasets with POS tags.
 
 %back-propogation alogithm
 %normalization factor
@@ -141,8 +151,17 @@ To resolve this, time series was normalized for each word by transforming the ti
 The Mean Shift model is then applied, which involves calculating the mean of the time series data before and after each potential change point.
 By comparing these means, the algorithm determines if a statistically significant change has occurred at any given point in time.
 
-\para{Change Point Algorithm.}
-The first step is to normalize the time series data for the word $w$.
+\begin{figure}[htb]
+    \centering
+    \vspace{-1em}
+    \includegraphics[scale=0.17]{figures/changepoint}
+    \vspace*{-0.5cm}
+    \caption{Change Point Algorithm (taken from \cite{kulkarni2014statisticallysignificantdetectionlinguistic}).}
+    \label{fig:kulkarni-changepoint}
+\end{figure}
+
+\para{Change point algorithm.}
+After constructing time series data for each word in the corpus—whether using frequency-based, syntactic, or distributional methods (\Cref{subsec:constructing-word-embeddings}), the first step is to normalize the time series data for the word $w$.
 After normalization, the algorithm computes a mean shift series, denoted as $K(Z(w))$.
 The mean shift is defined as the difference in the mean of a time series at different time points.
 The algorithm calculates this shift by segmenting the time series around a pivot point, denoted as time point $j$, and comparing the means of the segments before and after this point.
@@ -154,26 +173,27 @@ This p-value indicates how likely it is that the observed change at that time po
 The algorithm identifies potential change points by looking for times $j$ where the Z-Score $Z_j(w)$ is greater than or equal to the threshold $\gamma$.
 It then checks the p-values for these change points and selects the one with the smallest p-value, indicating the most significant change.
 The algorithm returns the p-value and the estimated change point (ECP).
-
 This information helps understand exactly when the meaning or usage of the word has shifted over time.
+\Cref{fig:kulkarni-changepoint} illustrates the important aspects of the algorithm.
 
 \subsection{Takeaways}\label{subsec:takeaways2}
-The algorithm (\Cref{subsec:kulkarni-rq2}) presented in the paper computes the mean shift series as part of its approach to detect significant changes in linguistic usage over time.
-The paper illustrates this with the example of the word `tape,' which transitioned from meaning adhesive tape to cassette tape, with the change detected in the 1970s.
-Similarly, the word `apple' shifted from being used primarily as a common noun to a proper noun associated with Apple Inc., with this change occurring around 1984.
+The change point detection algorithm (\Cref{subsec:kulkarni-rq2}) presented in the paper detects significant linguistic shifts over time by analyzing word time series data.
+To detect changes, they first convert these time series into Z-score series, which normalize the data and make it easier to identify shifts.
+The Mean Shift model is then applied, which involves calculating the mean of the time series data before and after each potential change point.
+By comparing these means, the algorithm determines if a statistically significant change has occurred at any given point in time.
+
+The paper illustrates this with the example of the word `tape,' which transitioned from meaning adhesive tape to cassette tape, with the change detected in the \emph{1970s}.
+Similarly, the word `apple' shifted from being used primarily as a common noun to a proper noun associated with Apple Inc., with this change occurring around \emph{1984}.
+
 These examples illustrate the algorithm’s capability to pinpoint when a word’s usage and meaning undergo significant shifts.
 The paper emphasizes the importance of analyzing these changes to understand linguistic evolution better.
 
-However, the effectiveness of this method can be constrained by its sensitivity to data perturbations and the quality of annotations.
-The performance of the methods, particularly the Syntactic method, declines as the perturbation increases.
-This indicates that while the method may work well under minimal changes, it struggles to maintain accuracy when the changes in the data are more pronounced
-
 \subsection{Results} \label{subsec:kulkarni-results}
 
-\para{Time Series Analysis \& Historical Analysis.}
+\para{Time series analysis \& historical analysis.}
 The results presented in Kulkarni et al.\ (2015) illustrate how words acquire new meanings and how these meanings change over time through time series and historical analysis.
 
-\para{Frequency \& Distributional.}
+\para{Frequency method.}
 For words like `transmitted,' `bitch,' `sex,' and `her,' the frequency and distributional methods reveal significant insights.
 For example, the sharp increase in the frequency of the word `her' around the 1960s can be attributed to the concurrent rise of the feminist movement.
 However, the frequency method can produce many false positives due to the temporary popularity of specific social and political events.
@@ -191,11 +211,11 @@ However, the frequency method can produce many false positives due to the tempor
 \end{table}
 \raggedbottom
 
-\para{Syntactic Method.}
+\para{Syntactic method.}
 The syntactic method uniquely detected the word `apple,' which saw its most frequent part of speech tag shift significantly from `Noun' to `Proper Noun.'
 This method has a low false positive rate but suffers from a high false negative rate, as evidenced by its detection of only two words in the study.
 
-\para{Distributional.}
+\para{Distributional method.}
 For words like `diet,' `tape,' and `plastic,' the distributional method sheds light on significant changes in their usage.
 The popularity of dieting books, starting with the bestseller `Dr. Atkins’ Diet Revolution' by Robert C. Atkins in 1972, shifted the meaning of `diet' from simply referring to the food consumed to a lifestyle of food consumption behavior.
 
@@ -205,7 +225,7 @@ While frequency and distributional methods can highlight shifts in usage, they a
 The syntactic method, though precise, may miss many significant changes.
 Therefore, a combined approach utilizing all methods may offer the most comprehensive insights into linguistic evolution
 
-\para{Cross Domain Analysis.}
+\para{Cross domain analysis.}
 The study extends its analysis to datasets like Amazon Reviews and Twitter, which cover much shorter time scales compared to the Google Books Ngram Corpus.
 This cross-domain analysis explores the impact of applying the distributional method on these more temporally constrained datasets.
 \Cref{tab:sources-examples} presents words that exhibit semantic change across various datasets.
