@@ -27,7 +27,7 @@ This paper, however, focuses on following two specific questions about semantic 
 \end{itemize}
 
 In our work on data voids, we have recognized that word frequency significantly impacts their identification.
-For instance, the term `sandy' saw a spike in usage during the Hurricane Sandy event.
+For instance, the term `sandy' saw a spike in usage during the Hurricane Sandy event (\Cref{subsec:kulkarni-results}).
 Similarly, terms associated with political agendas also experience increased usage during relevant events.
 This paper provides insights into how frequency influences the evolution of word meanings.
 
@@ -114,10 +114,13 @@ The model uses this probability estimation to distinguish true word-context pair
 The training objective is to maximize the probability of observed (target, context) pairs and minimize the probability of randomly sampled pairs, thereby learning embeddings that reflect the semantic relationships between words.
 
 \para{Aligning Embeddings.}
-Since the embeddings are trained independently for each time period, their vector spaces may not be directly comparable.
-The paper addresses this by aligning the embeddings from different time periods.
-They aligned the emebddings across time periods, which transforms the embeddings to minimize the distances between corresponding words in different periods.
-This step ensures that similar meanings are represented similarly across time.
+Words that have similar meanings across different time periods should ideally have similar embeddings.
+Alignment ensures that the embeddings from different periods are comparable, making it possible to observe how a word’s meaning shifts over time.
+
+This alignment process involves finding the best way to rotate and transform the embeddings from one time period so that they closely match the embeddings from the next period.
+This is done by finding an orthogonal transformation matrix (let’s call it $\mathbf{R}^{(t)}$) that minimizes the difference between the embeddings from two consecutive time periods.
+The transformation ensures that distances and angles between word vectors (which represent their meanings) are preserved, allowing for an accurate comparison.
+By aligning the embeddings, the authors could measure the semantic displacement of words—how much the meaning of a word has shifted from one time period to another.
 
 \subsection{Takeaways}\label{subsec:hamilton_takeaways1}
 The authors created three types of word embeddings using PPMI, SVD, and SGNS, each capturing different information.
@@ -126,67 +129,143 @@ SVD simplifies this information by reducing the dimensionality of the PPMI matri
 Lastly, SGNS learns embeddings by predicting surrounding words in a given context, uncovering deeper semantic and contextual nuances that the other methods may not capture.
 Additionally, they employed alignment technique to align word embeddings across different time periods, ensuring consistency and enabling the analysis of semantic shifts over time.
 
-%\subsection{Measuring Semantic Change}\label{subsec:measuring-semantic-change}
-%Once the embeddings are aligned, following methods are performed to quantify how much the meaning of word changes over time.
-%\begin{itemize}
-%    \item \para{Pair-wise similarity time-series}
-%        This method measures changes in the similarity between pairs of words over different time periods using cosine similarity.
-%        \begin{equation}
-%            s^{(t)}(w_i, w_j) = \text{cos-sim}(w_i^{(t)}, w_j^{(t)})
-%            \label{eq:equation2}
-%        \end{equation}
-%        The Spearman correlation $(\rho)$ is employed to measure the relationship between the similarity scores of word pairs and time.
-%        This non-parametric method assesses whether the similarity series shows a significant increase or decrease over time, which is crucial for understanding semantic shifts.
-%
-%    \item \para{Measuring semantic displacement}
-%        This method quantifies how much a word's meaning has changed by calculating the displacement of its vector representation across different time points.
-%        They use the aligned word vectors to compute the \emph{semantic displacement} that a word has undergone during a certain time-period.
-%        It is measured by calculating the distance between the vector representations of a word in different time periods.
-%        For a given word $w$, if $\mathbf{w}^{(t1)}$ and $\mathbf{w}^{(t2)}$ are its embeddings in two time periods $t1$ and $t2$, respectively, then the semantic displacement $\Delta$ is computed as:
-%        \begin{equation}
-%            \Delta(w) = \text{cos-dist}(\mathbf{w}^{(t1)}, \mathbf{w}^{(t2)}).\label{eq:equation3}
-%        \end{equation}
-%\end{itemize}
+\subsection{Measuring Semantic Change}\label{subsec:measuring-semantic-change}
+Once the embeddings are aligned, following methods are performed to quantify how much the meaning of word changes over time.
+\begin{itemize}
+    \item \para{Pair-wise similarity time-series}
+        This method measures changes in the similarity between pairs of words over different time periods using cosine similarity.
+        \begin{equation}
+            s^{(t)}(w_i, w_j) = \text{cos-sim}(w_i^{(t)}, w_j^{(t)})
+            \label{eq:equation2}
+        \end{equation}
+        The Spearman correlation $(\rho)$ is employed to measure the relationship between the similarity scores of word pairs and time.
+        This non-parametric method assesses whether the similarity series shows a significant increase or decrease over time, which helps us identify specific linguistic or cultural shifts.
+
+    \item \para{Measuring semantic displacement}
+        This method quantifies how much a word's meaning has changed by calculating the displacement of its vector representation across different time points.
+        They use the aligned word vectors to compute the \emph{semantic displacement} that a word has undergone during a certain time-period.
+        It is measured by calculating the distance between the vector representations of a word in different time periods.
+        For a given word $w$, if $\mathbf{w}^{(t1)}$ and $\mathbf{w}^{(t2)}$ are its embeddings in two time periods $t1$ and $t2$, respectively, then the semantic displacement $\Delta$ is computed as:
+        \begin{equation}
+            \Delta(w) = \text{cos-dist}(\mathbf{w}^{(t1)}, \mathbf{w}^{(t2)}).\label{eq:equation3}
+        \end{equation}
+\end{itemize}
 
 \subsection{Evaluation \& Results}\label{subsec:evaluation&results}
-They compared the different approaches discussed in \Cref{subsec:constructing-word-embeddings} on \emph{synchronic accuracy} (similarity within time-period) and \emph{diachronic validity} (semantic changes over time).
-\begin{itemize}
-    \item \para{Synchronic Accuracy}
-    Synchronic accuracy refers to the accuracy with which word embeddings capture the semantic relationships and meanings of words at a \emph{specific point in time}.
-    It assesses how well the models represent the semantic relationships among words in a given time period.
-    SVD performed best here.
-    \item \para{Diachronic Validity}
-    Diachronic validity evaluates how effectively the methods can detect and quantify changes in \emph{meaning over time}.
-    It involves testing the methods against historical data to see if they can accurately identify known shifts in word meanings.
-    The results indicated that SGNS was particularly effective in capturing these shifts, followed by SVD and PPMI\@.
-    \begin{itemize}
-        \item \textbf{Detecting Known Shifts.}
-        The goal in this task is for the methods to correctly capture whether pairs of words moved closer or further apart in semantic space during a pre-determined time-period.
+In this paper, the authors compared different word embedding approaches — PPMI, SVD, and SGNS \Cref{subsec:constructing-word-embeddings} by evaluating them
+on \emph{synchronic accuracy} (similarity within time-period) and \emph{diachronic validity} (semantic changes over time).
 
-        \item \textbf{Discovering Shifts from data.}
-        Tested whether the methods discover reasonable shifts by examining the top-10 words that changed the most from the 1900s to the 1990s according to the semantic displacement metric.
-    \end{itemize}
+%\begin{figure}[htb]
+%    \centering
+%    \vspace{-1em}
+%    \includegraphics[scale=0.17]{figures/hamilton}
+%    \vspace*{-0.5cm}
+%    \caption{Example of word 'gay' undergoing change in meaning over time (taken from \cite{hamilton-etal-2016-diachronic}).}
+%    \label{fig:hamilton-example}
+%\end{figure}
 
-\end{itemize}
+\para{Synchronic Accuracy.}
+Synchronic accuracy refers to the accuracy with which word embeddings capture the semantic relationships and meanings of words at a \emph{specific point in time}.
+It assesses how well the models represent the semantic relationships among words in a given time period.
+SVD performed best here followed by PPMI and SGNS\@.
+
+\para{Diachronic Validity.}
+Diachronic validity evaluates how effectively the methods can detect and quantify changes in \emph{meaning over time}.
+The authors evaluate the diachronic validity of their methods through two main tasks:
+
+\begin{figure}[tbh]
+    \centering
+    \vspace{-1em}
+    \includegraphics[scale=0.27]{figures/hamilton_known_shifts}
+    \vspace*{-0.5cm}
+    \caption{Known historical shifts from previous works (taken from \cite{hamilton-etal-2016-diachronic}).}
+    \label{fig:hamilton-known-shifts}
+\end{figure}
+
+\textbf{Detecting Known Shifts:}
+This task involves testing whether the methods can accurately capture historical shifts in word meanings that are already documented.
+The goal is to determine if the methods can identify whether pairs of words have moved closer or further apart in semantic space over a specified time period.
+The authors used a set of attested historical shifts as an evaluation set (\Cref{fig:hamilton-known-shifts}) to validate how well the embeddings capture these known changes.
+These examples are taken from previous works on semantic change.
+
+The results showed that all methods performed well in capturing the correct directionality of shifts, meaning they accurately identified whether word pairs became more similar or dissimilar over time.
+
+\para{Discovering Shifts from data.}
+In this task, the authors aimed to see if the methods could discover reasonable shifts in word meanings without prior knowledge of those shifts.
+They examined the top-10 words that changed the most from the 1900s to the 1990s (\Cref{tab:discovering-shifts-table}) based on semantic displacement metric (\Cref{subsec:measuring-semantic-change}).
+These words were categorized as \emph{genuine, borderline, or artifacts of the corpus} by the authors.
+
+SGNS outperformed the other methods, with 70\% of its top-10 list corresponding to genuine semantic shifts, while SVD and PPMI had lower rates of genuine shifts.
+
+\begin{table}[tbh]
+\begin{tabular}{@{}llll@{}}
+\toprule
+\rowcolor[HTML]{FFFFFF}
+\multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}}                                          & \multicolumn{3}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Examples}}                                                                                                                                                                                                                               \\ \cmidrule(l){2-4}
+\rowcolor[HTML]{FFFFFF}
+\multicolumn{1}{c}{\multirow{-2}{*}{\cellcolor[HTML]{FFFFFF}\textbf{Semantic Shift}}} & \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{PPMI}}                                                    & \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{SVD}}                  & \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{SGNS}}                                        \\ \midrule
+\rowcolor[HTML]{EFEFEF}
+\textbf{Genuine Shift}                                                                & started                                                                                                      & \begin{tabular}[c]{@{}l@{}}headed, calls,\\ gay, actually\end{tabular}    & \begin{tabular}[c]{@{}l@{}}wanting, gay, check, starting,\\ major, actually, headed\end{tabular} \\
+\cellcolor[HTML]{FFFFFF}\textbf{Borderline}                                           & \begin{tabular}[c]{@{}l@{}}know, got, would, \\ decided, think, stop, \\ remember, must, wanted\end{tabular} & male, naturally                                                           & touching                                                                                         \\
+\rowcolor[HTML]{EFEFEF}
+\textbf{Corpus Artifact}                                                              & -                                                                                                             & \begin{tabular}[c]{@{}l@{}}harry, wherever,\\ special, cover\end{tabular} & harry, romance                                                                                   \\ \bottomrule
+\end{tabular}
+\caption{The top 10 words identified by each embedding method were examined, and after reviewing the literature and analyzing their nearest neighbors,
+the authors categorized these words into different types of semantic shifts.
+For instance, the word “headed” shifted from primarily meaning the “top of a body or entity” to signifying “a direction of travel” indicated a \emph{genuine} shift.
+Additionally, some \emph{borderline} cases were identified, which were largely attributed to global shifts in genre or discourse, as well as corpus artifacts.
+For example, words like “special,” “cover,” and “romance” appeared to be \emph{artifacts} from the covers of fiction books, occasionally influenced by advertisements,
+taken from \cite{hamilton-etal-2016-diachronic}}
+\label{tab:discovering-shifts-table}
+\end{table}
+
 
 \subsection{Statistical Laws of Semantic Change}\label{subsec:statistical-laws-of-semantic-change}
-The authors establish two statistical laws of semantic change by analyzing a large dataset across multiple languages and time periods.
-They demonstrate these laws by involving the comparison of different word embedding models (PPMI, SVD, SGNS) against known historical semantic shifts and novel benchmarks.
+The authors utilized diachronic embeddings to perform a large-scale cross-linguistic analysis,
+revealing statistical laws that connect word frequency and polysemy to the rate of semantic change.
 
-How diachronic embeddings can be used to reveal statistical laws that relate frequency and polysemy to semantic change.
+The authors quantified semantic change using the cosine distance metric between word embeddings across consecutive time periods, expressed as:
+\begin{equation}
+\Delta^{(t)}(w_i) = \text{cos-dist}(\mathbf{w}_i^{(t)}, \mathbf{w}_i^{(t+1)})
+\label{eq:equation4}
+\end{equation}
 
-\begin{itemize}
-    \item \para{Law of conformity:} \emph{Frequently used words change at slower rates.}\\
-    Words with higher frequencies tend to experience slower rates of semantic change.
-    This is statistically supported by the observation that high-frequency words have smaller semantic displacements over time.
-    \item \para{Law of innovation:} \emph{Polysemous words change at faster rates.}\\
-    Polysemous words tend to change more rapidly.
-    The study finds that these words show larger semantic displacements, indicating more significant changes in meaning over time.
-\end{itemize}
+This equation measures how much a word’s meaning has shifted between two time periods t and t+1.
+The value $\Delta^{(t)}(w_i)$ indicates the rate of semantic change for the word $w_i$.
+
+To investigate the relationship between word frequency, polysemy, and semantic displacement, the authors performed regression analysis.
+They considered data points for each word across pairs of consecutive decades.
+Specifically, they analyzed how a word’s frequency and polysemy at time t correlated with its semantic displacement in the subsequent decade.
+
+The analysis was restricted to non-stop words that appeared more than 500 times in both decades contributing to a change.
+This criterion ensured that only words with sufficient co-occurrence data across years were included.
+
+The authors employed a linear mixed model with random intercepts per word and fixed effects for frequency, polysemy, and per decade.
+This model allowed them to estimate the effects of frequency and polysemy on semantic change while controlling for temporal trends and correcting for correlations between measurements on the same word across time.
+
+\para{Law of conformity:} \emph{Frequently used words change at slower rates.}\\
+The Law of Conformity states that the rates of semantic change scale with a negative power of word frequency.
+This means that words that are used more frequently tend to change their meanings at a slower rate compared to less frequently used words.
+
+This finding suggests that words with higher frequencies are more resistant to semantic shifts, confirming the Law of Conformity.
+The authors demonstrated this law by presenting results using SGNS embeddings.
+
+\para{Law of innovation:} \emph{Polysemous words change at faster rates.}\\
+The Law of Innovation posits that words with higher levels of polysemy—meaning they have multiple meanings—experience higher rates of semantic change.
+The authors measured a word’s polysemy by examining its neighborhood in an empirical co-occurrence network.
+They constructed these networks for the top 10,000 non-stop words in each language using the Positive Pointwise Mutual Information (PPMI) measure.
+In these networks, words are connected if they co-occur more often than would be expected by chance.
+The polysemy of a word is then quantified by its local clustering coefficient within this network.
+The clustering coefficient  $d(w_i)$  measures the proportion of a word  $w_i$’s neighbors that are also neighbors of each other.
+
+A high clustering coefficient (and thus a low polysemy score) indicates that the words a given word co-occurs with also tend to co-occur with each other. Conversely, polysemous words that appear in disjoint or unrelated contexts will have low clustering coefficients.
+
+The authors found that the logarithm of the polysemy score exhibits a strong positive effect on rates of semantic change. This finding supports the Law of Innovation by showing that words with more meanings (higher polysemy) change their meanings more rapidly.
 
 \subsection{Takeaways}\label{subsec:takeaways4}
 This paper explores how different types of word embedding models, such as PPMI, SVD, and SGNS, can be used to study diachronic shifts in word meanings.
 By analyzing these aligned embeddings, the authors identify two key statistical laws of semantic change.
-These findings provide a quantitative framework for understanding how and why languages evolve over time.
-
+Law of conformity shows that high-frequency words have smaller semantic displacements over time.
+They used statistical models to assess the relationship between word frequency and the rate of semantic change. Specifically, they found that the logarithm of a word's frequency had a significant negative effect on the rates of semantic change, indicating that higher frequency words change less rapidly
+The Law of Innovation is established by demonstrating that polysemous words—those with diverse meanings—tend to experience greater semantic change. The clustering coefficient was used as a key metric for measuring polysemy within co-occurrence networks, revealing that words with lower clustering coefficients (higher polysemy) are more prone to semantic shifts. This law highlights the dynamic nature of words with multiple meanings and their tendency to innovate in the face of linguistic evolution.
 

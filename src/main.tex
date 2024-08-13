@@ -1,4 +1,4 @@
-\documentclass[manuscript, screen, acmsmall]{acmart}
+\documentclass[screen, acmsmall]{acmart}
 \usepackage[noend]{algorithm2e}
 \usepackage{graphicx,balance,multirow,xspace,subcaption,longtable}
 \usepackage{tabularx,multirow,booktabs,blindtext}
@@ -60,6 +60,7 @@
 \clubpenalty=10000
 \widowpenalty=10000
 
+
 \newcommand{\red}[1]{\textcolor{red}{\bf #1}}
 \newcommand{\blue}[1]{\textcolor{blue}{\bf #1}}
 
@@ -97,34 +98,31 @@
 
 
 \begin{document}
-  \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
-  \pagestyle{plain} % removes running headers
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+\renewcommand{\sectionautorefname}{\S}
+\renewcommand{\subsectionautorefname}{\S}
+\renewcommand{\subsubsectionautorefname}{\S}
 
+\input{sections/titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Table of Contents
+\tableofcontents
+\newpage
 
-  \renewcommand{\sectionautorefname}{\S}
-  \renewcommand{\subsectionautorefname}{\S}
-  \renewcommand{\subsubsectionautorefname}{\S}
-
-  \input{sections/titlepage}
-  %%%%%%%%%%%%%%%%%%%%%%%%%%% Table of Contents
-%  \tableofcontents
-  \newpage
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
 %  \title{Understanding the flow of Temporal Context Shift in Data Voids}
 %  \maketitle
 %  \sloppy
-  %\input{sections/abstract}
-  %\newpage
-  \input{sections/introduction}
-  \newpage
-  \input{sections/relatedwork}
-  \newpage
-  \input{sections/paper_kulkarni}
-  \newpage
-  \input{sections/paper_hamilton}
-  \balance
-  \newpage
-  \bibliographystyle{ACM-Reference-Format}
-  \bibliography{main}
+%\input{sections/abstract}
+%\newpage
+\input{sections/introduction}
+\input{sections/relatedwork}
+\newpage
+\input{sections/paper_kulkarni}
+\newpage
+\input{sections/paper_hamilton}
+\balance
+\newpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{main}
 \end{document}
