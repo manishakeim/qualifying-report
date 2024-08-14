@@ -193,12 +193,11 @@ They utilized the \emph{BERT} model to generate contextual word embeddings, whic
 The extracted word usage vectors are then clustered into different \emph{usage types} using the \emph{k-means clustering algorithm}.
 This helped to identify distinct senses or meanings of the words as they appear in various contexts.
 They analyzed these clusters for a specific word across different time periods.
-The study proposed three metrics to quantify semantic change:
-\begin{packed_enumerate}
-    \item \textbf{Entropy Difference (ED)}: Measures the change in uncertainty (entropy) of a word’s usage distribution over time.
-    \item \textbf{Jensen-Shannon Divergence (JSD)}: Compares the similarity of word usage distributions across time intervals.
-    \item \textbf{Average Pairwise Distance (APD)}: Computes the average distance between word usage vectors from different periods, indicating shifts in word meaning.
-\end{packed_enumerate}
+The study proposed three metrics to quantify semantic change:\\
+\textbf{Entropy Difference (ED)}: Measures the change in uncertainty (entropy) of a word’s usage distribution over time.\\
+\textbf{Jensen-Shannon Divergence (JSD)}: Compares the similarity of word usage distributions across time intervals.\\
+\textbf{Average Pairwise Distance (APD)}: Computes the average distance between word usage vectors from different periods, indicating shifts in word meaning.
+
 The qualitative analysis indicated that the approach could capture various linguistic phenomena, including both synchronic (current usage) and diachronic (historical changes) aspects.
 
 \para{Semantic similarity:}
@@ -233,7 +232,7 @@ The field of linguistic change has traditionally focused on \emph{semantics}.
 However, recent studies have begun to explore the role of \emph{syntax} in language evolution as well.
 The \emph{syntactic} functionality of a word can evolve by transitioning into a new part-of-speech (POS) category.
 Nouns, due to their inherent flexibility in meaning, exhibit a greater tendency to undergo these changes driven by cultural shifts.
-While verbs are more likely to participate in gradual semantic changes that follow established linguistic patterns. \cite{hamilton-etal-2016-cultural, hamilton-etal-2016-diachronic}
+While verbs are more likely to participate in gradual semantic changes. \cite{hamilton-etal-2016-cultural, hamilton-etal-2016-diachronic}
 
 \para{Acquiring a new part of speech.}
 Kulkarni et al.\ assigned part-of-speech (POS) tags to a large collection of text.
@@ -267,7 +266,6 @@ Several studies from our literature review provide valuable insights for address
 The first being the work by Kulkarni et al.\ which introduces us to time series construction.
 Their distributional methods focuses on finding subtle semantic shits to determine the context where a word in used.
 This concept aligns perfectly with our goal of uncovering shifts in word usage when encountering data voids.
-
 Second paper by Hamilton et al.\ introduces us to word emebeddings alignment.
 Since we want to compare word vectors from different time periods, vectors should be aligned in same coordinate axes.
 After aligning the embeddings for individual time periods, we can use the aligned word vectors to compute the semantic displacement that a word has undergone during a certain time-period.

@@ -198,6 +198,8 @@ These words were categorized as \emph{genuine, borderline, or artifacts of the c
 SGNS outperformed the other methods, with 70\% of its top-10 list corresponding to genuine semantic shifts, while SVD and PPMI had lower rates of genuine shifts.
 
 \begin{table}[tbh]
+\centering
+\small
 \begin{tabular}{@{}llll@{}}
 \toprule
 \rowcolor[HTML]{FFFFFF}
@@ -215,7 +217,7 @@ the authors categorized these words into different types of semantic shifts.
 For instance, the word “headed” shifted from primarily meaning the “top of a body or entity” to signifying “a direction of travel” indicated a \emph{genuine} shift.
 Additionally, some \emph{borderline} cases were identified, which were largely attributed to global shifts in genre or discourse, as well as corpus artifacts.
 For example, words like “special,” “cover,” and “romance” appeared to be \emph{artifacts} from the covers of fiction books, occasionally influenced by advertisements,
-taken from \cite{hamilton-etal-2016-diachronic}}
+taken from \cite{hamilton-etal-2016-diachronic}.}
 \label{tab:discovering-shifts-table}
 \end{table}
 
@@ -267,5 +269,6 @@ This paper explores how different types of word embedding models, such as PPMI, 
 By analyzing these aligned embeddings, the authors identify two key statistical laws of semantic change.
 Law of conformity shows that high-frequency words have smaller semantic displacements over time.
 They used statistical models to assess the relationship between word frequency and the rate of semantic change. Specifically, they found that the logarithm of a word's frequency had a significant negative effect on the rates of semantic change, indicating that higher frequency words change less rapidly
-The Law of Innovation is established by demonstrating that polysemous words—those with diverse meanings—tend to experience greater semantic change. The clustering coefficient was used as a key metric for measuring polysemy within co-occurrence networks, revealing that words with lower clustering coefficients (higher polysemy) are more prone to semantic shifts. This law highlights the dynamic nature of words with multiple meanings and their tendency to innovate in the face of linguistic evolution.
+The Law of Innovation is established by demonstrating that polysemous words—those with diverse meanings—tend to experience greater semantic change. The clustering coefficient was used as a key metric for measuring polysemy within co-occurrence networks, revealing that words with lower clustering coefficients (higher polysemy) are more prone to semantic shifts.
+This law highlights the dynamic nature of words with multiple meanings and their tendency to innovate in linguistic evolution.
 
