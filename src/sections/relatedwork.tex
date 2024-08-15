@@ -193,11 +193,12 @@ They utilized the \emph{BERT} model to generate contextual word embeddings, whic
 The extracted word usage vectors are then clustered into different \emph{usage types} using the \emph{k-means clustering algorithm}.
 This helped to identify distinct senses or meanings of the words as they appear in various contexts.
 They analyzed these clusters for a specific word across different time periods.
-The study proposed three metrics to quantify semantic change:\\
-\textbf{Entropy Difference (ED)}: Measures the change in uncertainty (entropy) of a word’s usage distribution over time.\\
-\textbf{Jensen-Shannon Divergence (JSD)}: Compares the similarity of word usage distributions across time intervals.\\
-\textbf{Average Pairwise Distance (APD)}: Computes the average distance between word usage vectors from different periods, indicating shifts in word meaning.
-
+The study proposed three metrics to quantify semantic change:
+\begin{packed_enumerate}
+    \item Entropy Difference (ED): Measures the change in uncertainty (entropy) of a word’s usage distribution over time.
+    \item Jensen-Shannon Divergence (JSD): Compares the similarity of word usage distributions across time intervals.
+    \item Average Pairwise Distance (APD): Computes the average distance between word usage vectors from different periods, indicating shifts in word meaning.
+\end{packed_enumerate}
 The qualitative analysis indicated that the approach could capture various linguistic phenomena, including both synchronic (current usage) and diachronic (historical changes) aspects.
 
 \para{Semantic similarity:}
