@@ -151,14 +151,14 @@ To resolve this, time series was normalized for each word by transforming the ti
 The Mean Shift model is then applied, which involves calculating the mean of the time series data before and after each potential change point.
 By comparing these means, the algorithm determines if a statistically significant change has occurred at any given point in time.
 
-\begin{figure}[htb]
-    \centering
-    \vspace{-1em}
-    \includegraphics[scale=0.17]{figures/changepoint}
-    \vspace*{-0.5cm}
-    \caption{Change Point Algorithm (taken from \cite{kulkarni2014statisticallysignificantdetectionlinguistic}).}
-    \label{fig:kulkarni-changepoint}
-\end{figure}
+%\begin{figure}[htb]
+%    \centering
+%    \vspace{-1em}
+%    \includegraphics[scale=0.17]{figures/changepoint}
+%    \vspace*{-0.5cm}
+%    \caption{Change Point Algorithm (taken from \cite{kulkarni2014statisticallysignificantdetectionlinguistic}).}
+%    \label{fig:kulkarni-changepoint}
+%\end{figure}
 
 \para{Change point algorithm.}
 After constructing time series data for each word in the corpus—whether using frequency-based, syntactic, or distributional methods (\Cref{subsec:constructing-word-embeddings}), the first step is to normalize the time series data for the word $w$.
@@ -174,7 +174,7 @@ The algorithm identifies potential change points by looking for times $j$ where 
 It then checks the p-values for these change points and selects the one with the smallest p-value, indicating the most significant change.
 The algorithm returns the p-value and the estimated change point (ECP).
 This information helps understand exactly when the meaning or usage of the word has shifted over time.
-\Cref{fig:kulkarni-changepoint} illustrates the important aspects of the algorithm.
+%\Cref{fig:kulkarni-changepoint} illustrates the important aspects of the algorithm.
 
 \subsection{Takeaways}\label{subsec:takeaways2}
 The change point detection algorithm (\Cref{subsec:kulkarni-rq2}) presented in the paper detects significant linguistic shifts over time by analyzing word time series data.

@@ -3,21 +3,15 @@
 
 \section{Introduction} \label{sec:introduction}
 Language is a dynamic, living entity that continually adapts to reflect the changing world around us.
-With the evolving language, words take on new meanings through technological advancements, cultural shifts, and political movements.
-
-\para{Lanaguage evolution in political contexts.}
-The evolution of language is especially evident in political contexts, certain words or phrases can experience rapid shifts in meaning or become ambiguous.
-These are known as \emph{data voids} - situations where the meaning of a term has become unstable or contested, often due to deliberate efforts by political actors to redefine it.
-
-Unlike more general language evolution, where new terms emerge to describe novel concepts, data voids in politics involve the strategic manipulation of existing vocabulary.
-Political actors may repurpose words or introduce new phrases to frame debates in their favor, creating confusion and a lack of shared understanding.
-
-This phenomenon highlights how language can be weaponized as a political tool.
-As terms take on drastically different meanings for different groups, it can become challenging to maintain clear, authoritative information about their usage.
-The resulting `data voids' can then be exploited to spread misinformation or propaganda.
+As language evolves, words shift in meaning, acquire new connotations, or are repurposed for entirely new contexts.
+These changes occur as society, technology, and culture change.
+When words change meaning, there is often a delay before search engines and online platforms fully reflect these new meanings.
+This creates a \emph{data void} — an absence of relevant, up-to-date information based on the current understanding of the word.
+This void represents a gap between evolving language and existing online content.
 
 \para{Research goal.}
-My research goal is to find data voids in political context automatically and systematically study how word shifts their meaning over time.
+Understanding how words evolve is crucial because it allows us to anticipate where data voids might occur.
+By tracking linguistic changes, our goal is to predict when a word might create a gap in digital information which could lead to a potential data void.
 To achieve this, we have selected following research papers as a foundation for our research.
 
 \begin{itemize}
@@ -27,34 +21,36 @@ To achieve this, we have selected following research papers as a foundation for 
     ACL 2016 ~\cite{hamilton-etal-2016-diachronic} (\Cref{sec:paper_hamilton})
 \end{itemize}
 
-The concept of context drift, as presented in these papers, refers to the change in the contextual usage of words over time.
-This can be particularly useful for detecting and analyzing patterns followed by data voids in political contexts.
+The concept of semantic change, as presented in these papers, refers to the change in the contextual usage of words over time.
+This can be particularly useful for analyzing how words evolve and ensuring that, as meanings shift, data voids are promptly recognized and addressed.
 
-\para{Finding data voids is significantlly important.}
-Political events or campaigns can cause sudden changes in how certain terms are used or interpreted.
-Political actors may deliberately redefine terms or introduce new phrases to frame debates in their favor.
-Words or phrases can take on drastically different meanings in different political contexts or for different groups.
-Some terms may develop coded political meanings that aren't immediately apparent to all audiences.
-The lack of clear, authoritative information about a term's new political meaning can be exploited to spread misinformation or propaganda.
+\para{Finding data voids is significantly important.}
+Data voids have real-world implications, particularly in socio-political and sociotechnical domains.
+When important terms, especially those tied to politics, social issues, or technology, develop new meanings,
+data voids can be exploited to shape public perception.
 
-These elements can rapidly change the basic meaning (denotation) and the feelings or ideas they evoke (connotation) of words, making them challenging to track and analyze.
+Data voids, left unaddressed, can distort debates, influence elections, and shape collective beliefs, often in misleading or harmful directions.
+Once a data void is identified, it’s critical to fill that gap with accurate, authoritative information.
+Otherwise, bad actors can capitalize on the absence of reliable data to promote their own agenda.
+By understanding linguistic changes, researchers and technology platforms can work together to prevent these voids from becoming filled with harmful or misleading content.
 
 \para{Example.}
 The term \emph{crisis actor} has undergone a significant shift in meaning,
-exemplifying the phenomenon of context drift we've been discussing.
+exemplifying the phenomenon of semantic change we've been discussing.
 
-Originally this term was used in the entertainment and training industries,
-which refers to individuals hired to portray victims or other roles in simulated emergency scenarios.
-These simulations were used for training first responders, military personnel, or for other educational purposes.
+Historically, `crisis actor' referred to actors employed in emergency preparedness training exercises.
+These actors simulate victims or other roles in staged disaster drills to help first responders practice their response to crises like natural disasters or terrorist attacks.
+It was a technical, niche term with a specific and legitimate use.
 
-However, in recent years, the term has been full of misinformation which refers to genuine victims of violent events (mass shooting) in an attempt to prove that an event was staged or did not happen.
-This term got prominent during Sandy Hook Elementary School shooting (2012), Los Angeles International Airport (LAX) shooting (2013), Pulse Nightclub shooting in Orlando (2016), Las Vegas shooting (2017).
+However, in recent years, it is used to describe the idea that victims of real-world tragedies are actually actors.
+For example, in mass shootings, the victims have been referred to in propaganda and misinformation campaigns as `crisis actors,'
+falsely implying that the events were staged or fabricated.
 
-This example clearly demonstrates how a term with a specific, legitimate meaning can be repurposed to spread misinformation and conspiracy theories.
-The shift creates a potential data void where searches for \emph{crisis actor} might lead to a mix of factual information about emergency training and harmful conspiracy theories,
-making it difficult for users to distinguish accurate information.\\
+This example clearly demonstrates how a data void occurs when a word’s meaning is co-opted and evolves rapidly,
+leaving a gap in reliable, accurate content.
+This allows misinformation to flourish, having a profound impact on both political discourse and social trust.\\
 
-This report introduces methodologies for analyzing data voids based on two key papers.
+This report introduces methodologies to identify shifts in words and this will be useful in my research to proactively identify data voids based on two key papers.
 To contextualize our work, we present a thorough literature review examining the evolution of word meaning (\Cref{sec:relatedwork}).
 Subsequently, Section \Cref{sec:paper_kulkarni} delves into the first paper, focusing on significant linguistic change detection,
 while Section \Cref{sec:paper_hamilton} explores the second paper on diachronic word embeddings.
