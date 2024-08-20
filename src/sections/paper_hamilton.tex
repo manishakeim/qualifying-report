@@ -193,7 +193,13 @@ The results showed that all methods performed well in capturing the correct dire
 \para{Discovering Shifts from data.}
 In this task, the authors aimed to see if the methods could discover reasonable shifts in word meanings without prior knowledge of those shifts.
 They examined the top-10 words that changed the most from the 1900s to the 1990s (\Cref{tab:discovering-shifts-table}) based on semantic displacement metric (\Cref{subsec:measuring-semantic-change}).
-These words were categorized as \emph{genuine, borderline, or artifacts of the corpus} by the authors.
+The authors categorize the words identified as having shifted meanings into three distinct categories:\\
+\emph{Genuine shift:} Words that have undergone a clear and significant change in meaning over time.
+An example provided in the paper is the word `headed,' which shifted from primarily referring to the `top of a body/entity' to referring to `a direction of travel.'\\
+\emph{Borderline:} These are cases where the shift is not as clear-cut, often due to global genre or discourse shifts.
+These shifts might be more subtle and may not represent a complete change in meaning but rather a shift in usage within specific contexts.\\
+\emph{Corpus artifacts:} These are shifts that arise not from a true change in meaning but rather from peculiarities or biases in the corpus itself.
+For example, words like `special,' `cover,' and `romance' might appear to shift in meaning due to their frequent use in certain contexts like book covers or advertisements, which do not necessarily indicate a genuine semantic change.
 
 SGNS outperformed the other methods, with 70\% of its top-10 list corresponding to genuine semantic shifts, while SVD and PPMI had lower rates of genuine shifts.
 
@@ -213,14 +219,9 @@ SGNS outperformed the other methods, with 70\% of its top-10 list corresponding 
 \textbf{Corpus Artifact}                                                              & -                                                                                                             & \begin{tabular}[c]{@{}l@{}}harry, wherever,\\ special, cover\end{tabular} & harry, romance                                                                                   \\ \bottomrule
 \end{tabular}
 \caption{The top 10 words identified by each embedding method were examined, and after reviewing the literature and analyzing their nearest neighbors,
-the authors categorized these words into different types of semantic shifts.
-For instance, the word “headed” shifted from primarily meaning the “top of a body or entity” to signifying “a direction of travel” indicated a \emph{genuine} shift.
-Additionally, some \emph{borderline} cases were identified, which were largely attributed to global shifts in genre or discourse, as well as corpus artifacts.
-For example, words like “special,” “cover,” and “romance” appeared to be \emph{artifacts} from the covers of fiction books, occasionally influenced by advertisements,
 taken from \cite{hamilton-etal-2016-diachronic}.}
 \label{tab:discovering-shifts-table}
 \end{table}
-
 
 \subsection{Statistical Laws of Semantic Change}\label{subsec:statistical-laws-of-semantic-change}
 The authors utilized diachronic embeddings to perform a large-scale cross-linguistic analysis,

@@ -163,10 +163,12 @@ By comparing these means, the algorithm determines if a statistically significan
 \para{Change point algorithm.}
 After constructing time series data for each word in the corpus—whether using frequency-based, syntactic, or distributional methods (\Cref{subsec:constructing-word-embeddings}), the first step is to normalize the time series data for the word $w$.
 After normalization, the algorithm computes a mean shift series, denoted as $K(Z(w))$.
-The mean shift is defined as the difference in the mean of a time series at different time points.
+The \emph{mean shift} is defined as the difference in the mean of a time series at different time points.
 The algorithm calculates this shift by segmenting the time series around a pivot point, denoted as time point $j$, and comparing the means of the segments before and after this point.
-To assess the significance of the computed mean shifts, the algorithm employs a bootstrapping method.
-This involves generating multiple bootstrap samples, denoted as $BS$.
+To assess the significance of the computed mean shifts, the algorithm employs a \emph{bootstrapping} method.
+The algorithm uses bootstrap sampling to ensure that the detected change point is not just due to random noise.
+It generates multiple synthetic time series by randomly resampling the original time series, denoted as $BS$.
+These resampled sets serve as a reference to evaluate whether the detected shifts in the real data are significant or not.
 This is done by repeatedly drawing samples from the normalized data $Z(w)$ until the number of samples equals $B$, which is predefined.
 For each sample, the algorithm calculates a p-value for each time point $i$.
 This p-value indicates how likely it is that the observed change at that time point is significant.
