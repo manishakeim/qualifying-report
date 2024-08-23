@@ -2,18 +2,20 @@
 %! Date = 8/13/24
 
 \section{Conclusion}\label{sec:}
-In this report, we explored the mechanisms by which words change their meanings over time and how this process can be leveraged to identify data voids.
+In this report, we explored the mechanisms by which words change their meanings over time and how this process can be leveraged to identify \emph{data voids}.
 We examined two key studies to gain insights into this phenomenon.
 
-The first study by Kulkarni et al.\ (2015) presents a robust framework for detecting significant shifts in word usage over time.
-Their methodology involves constructing time series for individual words based on frequency, syntactic, and distributional methods, followed by the application of a change point detection algorithm using the Mean Shift model.
-This approach effectively identifies moments in time where notable changes in word usage or meaning occur, as illustrated by examples like the evolving meanings of “tape” and “apple,” and the contextual shift of “sandy” post-Hurricane Sandy.
+Kulkarni et al.\ (2015) introduced the concept of creating \emph{word embeddings} to measure the context of a word over time.
+By constructing these embeddings and applying \emph{change point detection}, they provided a powerful method for identifying significant shifts in word meanings.
+This approach can be instrumental in detecting data voids, as abrupt changes in word usage may signal emerging topics or areas where existing data is insufficient or outdated.
 
-The second study by Hamilton et al.\ (2016) advances the study of semantic change through the development and application of various word embedding models — PPMI, SVD, and SGNS — to track the evolution of word meanings over time.
-By aligning embeddings across different periods and employing metrics like Spearman correlation and Procrustes alignment,
-they uncover two important statistical laws: the Law of Conformity, which indicates that more frequent words undergo smaller semantic changes,
-and the Law of Innovation, which shows that words with higher polysemy are more likely to experience significant shifts in meaning.
-Their findings provide valuable tools and insights into the dynamics of language evolution.
+Hamilton et al.\ (2016) built on this foundation by applying variations of the word2vec model, particularly using the Skip-Gram with Negative Sampling (SGNS) method,
+to track the evolution of word meanings across different time periods.
+Hamilton’s unique contribution lies in the formulation of statistical laws governing semantic change, such as the Law of Conformity and the Law of Innovation.
+The \emph{Law of Conformity} indicates that more frequent words tend to undergo smaller semantic changes,
+suggesting that less frequent words may be more prone to shifts that could lead to data voids.
+Meanwhile, the \emph{Law of Innovation} reveals that words with higher polysemy are more likely to experience significant shifts in meaning.
+This insight is crucial for identifying data voids, as words with multiple meanings that rapidly evolve may create gaps in data coverage,
+highlighting areas where new data collection or analysis is needed to keep pace with linguistic changes.
 
-Through these papers, we have gained a deeper understanding of how semantic change can be detected and analyzed,
-offering powerful methodologies for identifying data voids in evolving linguistic landscapes.
+Monitoring such shifts can help identify areas where existing data may no longer capture the full spectrum of meanings.

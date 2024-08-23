@@ -166,13 +166,14 @@ After normalization, the algorithm computes a mean shift series, denoted as $K(Z
 The \emph{mean shift} is defined as the difference in the mean of a time series at different time points.
 The algorithm calculates this shift by segmenting the time series around a pivot point, denoted as time point $j$, and comparing the means of the segments before and after this point.
 To assess the significance of the computed mean shifts, the algorithm employs a \emph{bootstrapping} method.
-The algorithm uses bootstrap sampling to ensure that the detected change point is not just due to random noise.
-It generates multiple synthetic time series by randomly resampling the original time series, denoted as $BS$.
-These resampled sets serve as a reference to evaluate whether the detected shifts in the real data are significant or not.
+The algorithm uses bootstrap samplingto estimate how likely an observed shift is, under the assumption that no real change has occurred (the null hypothesis).
+It generates multiple time series by randomly resampling the original time series, denoted as $BS$.
 This is done by repeatedly drawing samples from the normalized data $Z(w)$ until the number of samples equals $B$, which is predefined.
-For each sample, the algorithm calculates a p-value for each time point $i$.
-This p-value indicates how likely it is that the observed change at that time point is significant.
-The algorithm identifies potential change points by looking for times $j$ where the Z-Score $Z_j(w)$ is greater than or equal to the threshold $\gamma$.
+The p-value is then calculated by comparing the observed mean shift to the distribution of mean shifts from the bootstrapped samples.
+It reflects the proportion of times that the mean shift from the random (permuted) samples exceeds the observed mean shift.
+A low p-value indicates that the observed shift is unlikely to be due to random fluctuations alone.
+The algorithm identifies potential change points by looking for times $j$ where the Z-Score $Z_j(w)$ is greater than or equal to the threshold $\gamma$,
+which is set to the 96th percentile, to filter out less significant potential change points.
 It then checks the p-values for these change points and selects the one with the smallest p-value, indicating the most significant change.
 The algorithm returns the p-value and the estimated change point (ECP).
 This information helps understand exactly when the meaning or usage of the word has shifted over time.
